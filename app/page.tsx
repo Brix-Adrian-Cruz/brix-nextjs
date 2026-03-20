@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Welcome to Pantheon Platform</div>;
+  return <div>My favorite food is Sinigang</div>;
 }
