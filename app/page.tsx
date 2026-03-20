@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>My favorite food is Sinigang</div>;
+  return <div>My favorite food is Steak</div>;
 }
