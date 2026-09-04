@@ -12,10 +12,12 @@ const UseCacheHandlerClass = createUseCacheHandler({
 const handler = new UseCacheHandlerClass();
 
 // Export the handler instance directly
-export default {
+const useCacheHandler = {
   get: handler.get.bind(handler),
   set: handler.set.bind(handler),
   refreshTags: handler.refreshTags.bind(handler),
   getExpiration: handler.getExpiration.bind(handler),
   updateTags: handler.updateTags.bind(handler),
 };
+
+export default useCacheHandler;

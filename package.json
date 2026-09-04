@@ -11,14 +11,16 @@
   },
   "dependencies": {
     "@pantheon-systems/nextjs-cache-handler": "^0.4.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.11",
     "next": "^16.1.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "typescript": "^5"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^20",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19",
