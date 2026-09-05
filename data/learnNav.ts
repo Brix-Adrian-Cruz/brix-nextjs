@@ -53,7 +53,7 @@ export const levels: Level[] = [
         href: "/learn/platform",
         title: "Platform context",
         summary:
-          "Compatibility, requirements, known limitations, and how to tell a Next.js site when you see one.",
+          "Compatibility, requirements, known limitations, an FAQ of recurring gotchas, and how to tell a Next.js site when you see one.",
       },
       {
         href: "/learn/debugging",

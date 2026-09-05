@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Callout from "@/components/learn/Callout";
 import LessonHeader from "@/components/learn/LessonHeader";
 import LessonNav from "@/components/learn/LessonNav";
@@ -8,7 +9,7 @@ const HREF = "/learn/platform";
 export const metadata: Metadata = {
   title: "Platform context",
   description:
-    "Compatibility, requirements, limitations, and identifying a Next.js site.",
+    "Compatibility, requirements, limitations, an FAQ, and identifying a Next.js site.",
 };
 
 export default function Page() {
@@ -123,6 +124,97 @@ export default function Page() {
           docs.
         </p>
       </Callout>
+
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+        <h2 id="faq">Frequently asked questions</h2>
+        <p>
+          The questions below come up repeatedly, and most of them have an
+          answer that is specific to how the platform builds and serves a site
+          rather than to Next.js itself. That is why searching the framework
+          docs for them tends not to help.
+        </p>
+
+        <h3>My build succeeded, but none of my changes are on the site.</h3>
+        <p>
+          Check which package manager the project uses. A yarn build{" "}
+          <strong>silently skips <code>next build</code></strong> unless the
+          project defines a <code>gcp-build</code> script — the build reports
+          success without having built anything. Add the script and rebuild.
+        </p>
+
+        <h3>Can I use Bun?</h3>
+        <p>
+          To install and build, yes. As the runtime, no — the buildpack does not
+          export the Bun binary into the runtime image, so a site configured to
+          run on Bun builds cleanly and then fails to start.
+        </p>
+
+        <h3>I changed a secret and nothing happened.</h3>
+        <p>
+          Secrets and environment variables are read <strong>at build time</strong>.
+          Changing one does not affect the running deployment until you rebuild.
+          This is the single most common false bug report about secrets. See{" "}
+          <Link href="/learn/secrets">secrets and environment variables</Link>.
+        </p>
+
+        <h3>
+          Assets under <code>/_next/static/</code> are 404ing right after a
+          deploy.
+        </h3>
+        <p>
+          Expected, briefly. The deploy prunes asset files that are no longer
+          part of the new build, while HTML cached from the previous build still
+          points at the old chunk names. It clears itself in roughly five to ten
+          minutes. <strong>&quot;Clear caches&quot; does not help</strong> — it
+          is a different cache layer.
+        </p>
+
+        <h3>Why will my private repository not link during site creation?</h3>
+        <p>
+          The Pantheon GitHub App has to be granted access to{" "}
+          <strong>that specific repository</strong>. Installing it on the
+          account or organisation is not enough for a private repo — grant
+          access in the GitHub App settings, then retry.
+        </p>
+
+        <h3>My multidev environment still exists after I closed the PR.</h3>
+        <p>
+          Multidevs are not currently deleted automatically when a pull request
+          closes. This is a known bug rather than intended behaviour, so delete
+          them by hand until it is fixed.
+        </p>
+
+        <h3>My build cannot authenticate to a private git submodule.</h3>
+        <p>
+          The build has no ambient git credentials. Supply one through Secrets
+          Manager as an entry with type <code>env</code> and scope{" "}
+          <code>web</code>, and the submodule fetch can use it.
+        </p>
+
+        <h3>Draft Mode works locally but not on the platform.</h3>
+        <p>
+          Check whether the <code>__prerender_bypass</code> cookie is actually
+          reaching the application. If the CDN strips it, draft requests are
+          served the published page and Draft Mode looks silently broken.
+        </p>
+
+        <h3>Why did my build break when I did not change anything?</h3>
+        <p>
+          Almost always a dependency resolving to a newer version than the one
+          the project was last built against — which is what happens with a
+          caret range and no committed lockfile. Commit the lockfile and pin
+          the framework version.
+        </p>
+
+        <p>
+          For the platform-side causes behind several of these, and how to tell
+          a known issue from a new one, see{" "}
+          <Link href="/blog/recurring-nextjs-platform-issues">
+            recurring platform issues
+          </Link>
+          .
+        </p>
+      </div>
 
       <LessonNav href={HREF} />
     </article>
