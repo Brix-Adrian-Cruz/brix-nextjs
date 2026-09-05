@@ -21,7 +21,7 @@
   --color-primary-900: oklch(0.32 0.075 245);
   --color-primary-950: oklch(0.24 0.055 247);
 
-  /* Status colours, matching the BUILD_ and DEPLOYMENT_ status vocabulary
+  /* Status colors, matching the BUILD_ and DEPLOYMENT_ status vocabulary
      used throughout the playbooks. */
   --color-status-ok: oklch(0.62 0.15 150);
   --color-status-warn: oklch(0.72 0.15 75);

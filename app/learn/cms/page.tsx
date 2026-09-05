@@ -70,7 +70,7 @@ const { data } = await response.json();
 const titles = data.map((node) => node.attributes.title);`}</code>
         </pre>
 
-        <h2>Normalise at the boundary</h2>
+        <h2>Normalize at the boundary</h2>
         <p>
           Do not let CMS-shaped objects spread through your components. Convert
           to your own shape in one place, and the rest of the app stops caring

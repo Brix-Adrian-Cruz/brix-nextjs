@@ -138,7 +138,7 @@ export default function Page() {
       <Callout variant="tip" title="Confirm from outside too">
         <p>
           Response headers on the deployed site show cache status, and the
-          simplest behavioural test is the one these demos use: load a page
+          simplest behavioral test is the one these demos use: load a page
           twice and see whether anything time-dependent changed.
         </p>
       </Callout>

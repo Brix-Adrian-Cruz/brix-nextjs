@@ -108,7 +108,7 @@ function toPlainText(html: string | null): string {
     .trim();
 }
 
-/** Normalise at the boundary, so components never see WordPress' shape. */
+/** Normalize at the boundary, so components never see WordPress' shape. */
 function toPost(raw: RawPost): WpPost {
   return {
     slug: raw.slug,

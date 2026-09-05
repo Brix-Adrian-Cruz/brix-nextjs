@@ -69,7 +69,7 @@ git push origin pantheon_live_1`}</code>
 
         <ol>
           <li>
-            Branch with the <code>multi-</code> prefix the platform recognises,
+            Branch with the <code>multi-</code> prefix the platform recognizes,
             for example <code>multi-nav-redesign</code>.
           </li>
           <li>Push the branch; the environment builds from it.</li>
