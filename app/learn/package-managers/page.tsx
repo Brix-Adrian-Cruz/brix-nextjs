@@ -122,7 +122,7 @@ export default function Page() {
         </p>
       </div>
 
-      <Callout variant="tip" title="A build failure worth recognising">
+      <Callout variant="tip" title="A build failure worth recognizing">
         <p>
           <code>npm ci can only install packages when your package.json and
           package-lock.json are in sync</code> means someone edited{" "}

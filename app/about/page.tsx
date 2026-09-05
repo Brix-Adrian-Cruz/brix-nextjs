@@ -43,7 +43,7 @@ export default function AboutPage() {
 
             <h2>A caution</h2>
             <p>
-              Platform behaviour changes. Where a step here disagrees with what
+              Platform behavior changes. Where a step here disagrees with what
               the Dashboard or CLI actually does, the platform is right and this
               page is stale — raise it rather than working around it.
             </p>

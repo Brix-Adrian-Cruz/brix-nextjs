@@ -177,13 +177,13 @@ If a deployed environment shows the "WordPress is not connected" notice after
 you have set the variable, suspect a cached pre-configuration render before
 suspecting the config.
 
-All WordPress access goes through `lib/wordpress.ts`, which normalises
+All WordPress access goes through `lib/wordpress.ts`, which normalizes
 responses so components never see CMS-shaped objects. See `/learn/cms` for the
 reasoning.
 
 ## Deploying to Pantheon
 
-The project is configured for Pantheon Front-End Sites: `output: 'standalone'`
+The project is configured as a Pantheon Next.js Site: `output: 'standalone'`
 plus both cache handlers wired up in `next.config.ts`.
 
 **Deployment is driven by git tags, not by pushing a branch.** The tag name

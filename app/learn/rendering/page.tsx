@@ -17,28 +17,28 @@ const DEMOS = [
     href: "/learn/rendering/static",
     name: "Static",
     when: "Rendered once at build time",
-    behaviour: "Timestamp never moves",
+    behavior: "Timestamp never moves",
     use: "Blog posts, docs, marketing pages",
   },
   {
     href: "/learn/rendering/dynamic",
     name: "Dynamic",
     when: "Rendered on every request",
-    behaviour: "Timestamp changes every refresh",
+    behavior: "Timestamp changes every refresh",
     use: "Per-user pages, carts, anything reading cookies",
   },
   {
     href: "/learn/rendering/revalidated",
     name: "Revalidated",
     when: "Cached, refreshed on a timer",
-    behaviour: "Holds still, then jumps",
+    behavior: "Holds still, then jumps",
     use: "CMS content — the usual right answer",
   },
   {
     href: "/learn/rendering/streaming",
     name: "Streaming",
     when: "Fast parts first, slow parts after",
-    behaviour: "Skeleton, then content swaps in",
+    behavior: "Skeleton, then content swaps in",
     use: "A fast page with one slow widget",
   },
 ];
@@ -72,7 +72,7 @@ export default function Page() {
                 {demo.when}
               </span>
               <span className="mt-2 block text-xs font-medium text-primary-600 dark:text-primary-400">
-                {demo.behaviour} →
+                {demo.behavior} →
               </span>
             </Link>
           </li>

@@ -9,7 +9,7 @@ summary: "Next.js Sites and Front-End Sites are two different products. Telling 
 Next.js selected as the framework, the same way they would pick WordPress or
 Drupal. These are usually called **Next.js Sites**.
 
-## Next.js Sites is not Front-End Sites
+## Next.js Sites are not Front-End Sites
 
 This is the distinction that causes the most confusion, and getting it wrong
 sends you down the wrong runbook entirely.
@@ -34,17 +34,22 @@ else. Every later step assumes you got this right.
 
 ## Scope of support
 
-Support is expected to **fully support Next.js Sites**, both front-end and
-back-end.
+We handle **the platform layer of Next.js Sites in full** — builds, deployments,
+environments, caching, secrets, and the CMS back-end when it is hosted here.
 
-The one exception: when the back-end is hosted somewhere other than Pantheon,
-we cannot audit it. In that case the customer needs to work with their own CMS
-host.
+Two things fall outside that:
+
+- **The customer's application code.** Routing, rendering strategy, and how the
+  app handles API responses are not formally supported. We can still audit the
+  code and point the customer in the right direction, but making the change is
+  theirs to do.
+- **A back-end hosted somewhere other than Pantheon.** We cannot audit what we
+  do not host, so the customer needs to work with their own CMS host.
 
 To begin any investigation, start with
 [where to start when a Next.js site has problems](/blog/where-to-start-nextjs-problems).
 
 ## Questions
 
-Post in the Next.js support channel in Slack. There is a named SME contact for
-the project who can be tagged if needed.
+Post in `#ask-nextjs`. There is a named SME contact for the project who can be
+tagged if needed.

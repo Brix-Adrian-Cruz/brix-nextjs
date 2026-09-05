@@ -62,7 +62,7 @@ terminus site:create <site-name> <label> <upstream>`}</code>
       <Callout variant="verify">
         <p>
           Terminus subcommands and their exact flags change between releases,
-          and Front-End Sites has its own command set. Run{" "}
+          and Next.js Sites have their own command set. Run{" "}
           <code>terminus list</code> and <code>terminus help &lt;command&gt;</code>{" "}
           against the version you actually have rather than trusting the shapes
           above — they are here to show the workflow, not as a reference.

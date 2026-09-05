@@ -155,7 +155,7 @@ cacheMaxMemorySize: 0,`}</code>
           change between builds.
         </p>
 
-        <h3>Deployed, check behaviour across instances</h3>
+        <h3>Deployed, check behavior across instances</h3>
         <p>
           The real test is the one that was broken before: load a revalidating
           page repeatedly on the deployed site. If the timestamp bounces

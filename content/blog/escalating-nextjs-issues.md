@@ -17,7 +17,7 @@ customer's side. Checking this first prevents unnecessary escalations.
 1. Open the Grafana dashboards and look for unusual activity across Next.js
    sites.
 2. Check the Pantheon status page for active incidents.
-3. Post in the support channel with an `@here` asking whether colleagues are
+3. Post in `#ask-nextjs` with an `@here` asking whether colleagues are
    seeing similar reports. This is the fastest way to confirm whether several
    customers are hitting the same thing.
 
@@ -34,14 +34,14 @@ that path below.
    as normal.
 4. Create a Swarm in the CSE channel and get a colleague's help **before**
    reaching out to other teams or filing a bug.
-5. If the Swarm does not solve it, post in the Next.js channel with the issue
+5. If the Swarm does not solve it, post in `#ask-nextjs` with the issue
    and context, linking back to the Swarm.
 6. If it is confirmed as a platform-level bug, escalate to PDE.
 
 ## Escalating a Next.js application issue
 
 These originate in the customer's own code — routing misconfigurations, ISR or
-Cache Handler behaviour not matching the application config, API responses not
+Cache Handler behavior not matching the application config, API responses not
 handled as expected. They are outside Pantheon's support scope, though guidance
 is available internally during the launch phase.
 

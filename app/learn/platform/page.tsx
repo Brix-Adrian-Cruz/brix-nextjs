@@ -21,7 +21,7 @@ export default function Page() {
         <h2>How to tell you are on a Next.js site</h2>
         <p>
           Worth being able to do in a few seconds, because it decides which
-          runbook applies. Front-End Sites and the classic CMS platform behave
+          runbook applies. Next.js Sites and the classic CMS platform behave
           nothing alike.
         </p>
 
@@ -77,7 +77,7 @@ export default function Page() {
           </li>
         </ul>
 
-        <h2>Limitations worth internalising</h2>
+        <h2>Limitations worth internalizing</h2>
       </div>
 
       <Callout variant="warning" title="The filesystem is ephemeral">
@@ -173,14 +173,14 @@ export default function Page() {
         <p>
           The Pantheon GitHub App has to be granted access to{" "}
           <strong>that specific repository</strong>. Installing it on the
-          account or organisation is not enough for a private repo — grant
+          account or organization is not enough for a private repo — grant
           access in the GitHub App settings, then retry.
         </p>
 
         <h3>My multidev environment still exists after I closed the PR.</h3>
         <p>
           Multidevs are not currently deleted automatically when a pull request
-          closes. This is a known bug rather than intended behaviour, so delete
+          closes. This is a known bug rather than intended behavior, so delete
           them by hand until it is fixed.
         </p>
 

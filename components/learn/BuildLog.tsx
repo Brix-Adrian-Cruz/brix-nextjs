@@ -58,7 +58,7 @@ const STEPS: {
   {
     title: "Connect WordPress over WPGraphQL",
     detail:
-      "A decoupled backend feeding /news. One file talks to the CMS and normalises the response, so components never see WordPress-shaped data.",
+      "A decoupled backend feeding /news. One file talks to the CMS and normalizes the response, so components never see WordPress-shaped data.",
     artifact: "lib/wordpress.ts",
     lesson: { href: "/learn/cms", label: "Sourcing from a CMS" },
   },

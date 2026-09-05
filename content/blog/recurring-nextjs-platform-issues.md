@@ -2,17 +2,17 @@
 title: "Recurring platform issues and what causes them"
 date: "2026-09-05"
 tags: ["support", "platform", "builds"]
-summary: "Six categories that keep coming back in the support channel, with the underlying cause for each — so a repeat report gets recognised rather than re-investigated."
+summary: "Six categories that keep coming back in #ask-nextjs, with the underlying cause for each — so a repeat report gets recognized rather than re-investigated."
 ---
 
-The support channel covers Pantheon's Next.js hosting product, so what arrives
+`#ask-nextjs` is about Pantheon's Next.js hosting product, so what arrives
 there is almost always a **platform** issue rather than a general framework
 question. That distinction matters: the answer is usually in how the platform
 builds, deploys, or serves the site, not in the customer's Next.js code.
 
-These six categories account for most of what has come in recently. If a report
-matches one, you are probably looking at a known cause rather than something
-new.
+These six categories account for most of what has come in over the last couple
+of months. If a report matches one, you are probably looking at a known cause
+rather than something new.
 
 > Statuses change. Confirm anything described here as fixed or open before
 > repeating it to a customer.
@@ -22,15 +22,16 @@ new.
 **Symptom.** A build never starts. The status sits at queued and the build log
 is empty rather than showing a failure.
 
-**Cause.** A platform-side database behind version-control event processing was
-under-provisioned and would saturate under load. Once it did, the callback
-handling GitHub's Deployments API would panic on a nil pointer, and the build
-event was never processed.
+**Cause.** The `evcs` VCS-event Cloud SQL database was under-provisioned and
+would peg at 100% CPU under load. Once it did, the callback handling GitHub's
+Deployments API panicked on a nil pointer, and the build event was never
+processed.
 
 **What to do.** There is nothing in the customer's repository to fix, so do not
-send them looking. Capacity has been increased, but this recurred several times
-before a lasting fix landed — if you see it again, treat it as a platform
-incident and escalate rather than re-diagnosing.
+send them looking. The fix was to bump the database capacity and reconverge the
+affected tenants. This recurred several times before a lasting fix landed, so
+if you see it again, treat it as a platform incident and escalate rather than
+re-diagnosing.
 
 ## 2. `ENOENT` on `next-server.js.nft.json`
 
@@ -38,13 +39,13 @@ incident and escalate rather than re-diagnosing.
 `next-server.js.nft.json`.
 
 **Cause.** A tracing bug in Next 16.3's Turbopack. Sites picked it up without
-changing anything themselves, because the platform starter template floated the
-Next version with a caret range and shipped without a lockfile — so a fresh
-build resolved to a newer minor than the one the template was tested against.
+changing anything themselves, because the platform template floated `^16.2`
+and shipped without a lockfile — so a fresh build resolved to a newer minor
+than the one the template was tested against.
 
 **What to do.** Pin Next to a known-good version. The template has been pinned
-back to 16.2. This is also the clearest argument you have for why a committed
-lockfile is a requirement and not a formality — see
+back to 16.2 (SITE-6068). This is also the clearest argument you have for why a
+committed lockfile is a requirement and not a formality — see
 [platform context](/learn/platform).
 
 ## 3. Package manager gotchas
@@ -68,16 +69,16 @@ Bun, the site must run on a supported runtime even if Bun does the build. See
 **Symptom.** Immediately after a deploy, pages load but assets 404. The paths
 are all under `/_next/static/`.
 
-**Cause.** The deploy syncs the new asset set and prunes files that are no
-longer part of it. HTML cached from the previous build still references the
-old chunk filenames, which are now gone.
+**Cause.** The deploy runs `gsutil rsync -d`, which deletes objects that are
+not part of the new build. HTML cached from the previous build still references
+the old chunk filenames, which are now gone.
 
-**What to do.** It self-heals in roughly five to ten minutes as the cached HTML
-ages out. **"Clear caches" does not help** — tell the customer this before they
-try it and conclude the platform is broken. There is no force-rebuild control
-yet; a tracked platform bug covers that gap. Related reports of 404s from
-edge-cache clear or revalidation trace to surrogate-key handling in the proxy
-and have been worked around by rebuilding.
+**What to do.** It self-heals in five to ten minutes as the cached HTML ages
+out. **"Clear caches" does not help** — tell the customer this before they try
+it and conclude the platform is broken. There is no force-rebuild control yet;
+DS-1726 covers that gap. Separately, 404s reported after an `EdgeCacheClear` or
+a revalidation trace back to surrogate-key bugs in the proxy; rebuilding is the
+current workaround.
 
 ## 5. Secret and environment variable changes need a rebuild
 
@@ -85,8 +86,8 @@ and have been worked around by rebuilding.
 secrets are broken.
 
 **Cause.** Values are read at build time. Changing one does not affect a
-running deployment until the site is rebuilt. This went undocumented for a
-long time, which is why it kept arriving as a bug report.
+running deployment until the site is rebuilt. This went undocumented until a
+docs PR was filed, which is why it kept arriving as a bug report.
 
 **What to do.** Have them trigger a rebuild after any secret change. See
 [secrets and environment variables](/learn/secrets).
@@ -102,17 +103,17 @@ creation, or multidev environments accumulate after their pull requests close.
   repository**. Installing it on the account is not sufficient for a private
   repo.
 - Multidev environments are **not automatically deleted when a PR closes**.
-  This is an open bug, not intended behaviour.
+  This is an open bug, BUGS-11480, not intended behavior.
 
 **What to do.** For linking, walk the customer through granting repository
 access in the GitHub App settings. For multidevs, delete them manually and set
 expectations that this is currently a manual step.
 
-## Seen once, worth recognising
+## Seen once, worth recognizing
 
 **Draft Mode not working.** The `__prerender_bypass` cookie was not reaching
-the application through the CDN, so draft requests were served the published
-page instead.
+the application through Pantheon's CDN, so draft requests were served the
+published page instead.
 
 **Private git submodules failing to authenticate at build time.** Resolved with
 a Secrets Manager entry — type `env`, scope `web` — carrying the credential the

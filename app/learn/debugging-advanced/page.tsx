@@ -42,7 +42,7 @@ export default function Page() {
           down, not the page file.
         </p>
 
-        <h3>2. Behaviour</h3>
+        <h3>2. Behavior</h3>
         <p>
           Load the page twice and look for anything time-dependent. Unchanged
           means cached; changed every time means dynamic. This is what the{" "}
@@ -100,7 +100,7 @@ export default function Page() {
           site hammering its CMS.
         </p>
 
-        <p>Patterns worth recognising:</p>
+        <p>Patterns worth recognizing:</p>
         <ul>
           <li>
             <strong>A burst at build time, then near silence.</strong> Healthy

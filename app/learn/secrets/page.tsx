@@ -66,7 +66,7 @@ process.env.NEXT_PUBLIC_SITE_URL`}</code>
 
         <h2>Setting them with Terminus</h2>
         <p>
-          On Front-End Sites the command is <code>secret:site:set</code> — not
+          On Next.js Sites the command is <code>secret:site:set</code> — not
           anything under <code>env:</code>, which is where most people look
           first.
         </p>

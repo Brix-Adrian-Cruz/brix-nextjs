@@ -49,7 +49,7 @@ team needs to make them identical on both sides.
 
 ### Content updates, but only after a long delay
 
-This is expected behaviour for time-based ISR with no webhooks. Content will
+This is expected behavior for time-based ISR with no webhooks. Content will
 not update until the `revalidate` interval expires.
 
 Tell the customer this is working as configured. To make publishes appear

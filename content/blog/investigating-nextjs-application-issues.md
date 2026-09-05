@@ -106,7 +106,7 @@ Cloning the repo and running the build yourself is the fastest way to separate
 a code problem from a platform one. There is one trap in that workflow worth
 knowing about before it costs you an hour.
 
-Front-End Sites build with `output: 'standalone'` in `next.config.ts`, and
+Next.js Sites build with `output: 'standalone'` in `next.config.ts`, and
 `next start` does not support that mode. It does not fail loudly — it prints a
 warning and can serve output from an earlier build:
 

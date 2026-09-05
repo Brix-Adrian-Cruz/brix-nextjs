@@ -82,13 +82,19 @@ patterns suggesting one page or API call fails consistently.
 Treat these like NGINX logs: **diagnose from patterns and repeated response
 codes across many entries**, not from single lines.
 
-Note that standalone Next.js sites produce very little runtime log activity.
-Low volume on a static site is expected, not a misconfiguration.
+Expect low volume. Most pages on these sites are prerendered and served from
+the edge cache, so comparatively few requests ever reach the application to be
+logged. A quiet runtime log is normal here, not evidence of a misconfiguration —
+do not read it as the site being down.
 
 ### Reading runtime logs in GCP
 
-On the Cloud Run page, find the line reading `Next start`. That marks where the
-customer's code begins executing.
+On the Cloud Run page, find the entry where the Next.js server reports itself
+ready. That marks where the customer's code begins executing.
 
-Everything after that moment should also appear in the dashboard's Builds tab —
-so, as with build logs, the value of GCP is what happened *before* it.
+Everything after that point also appears in the dashboard's Runtime Logs tab —
+so, as with build logs, what GCP adds is everything *before* it: the container
+starting, the image being pulled, and any failure that stopped the application
+from booting at all. A site that never gets past this point logs nothing to the
+dashboard, which is why it can look like there are no logs rather than a
+crash.

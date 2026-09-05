@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { slugifyTag } from "@/lib/posts";
 
-/** Colour by topic, so severity-ish subjects read differently from process. */
+/** Color by topic, so severity-ish subjects read differently from process. */
 const ACCENTS: Record<string, string> = {
   triage:
     "border-primary-300 bg-primary-50 text-primary-700 dark:border-primary-700 dark:bg-primary-950 dark:text-primary-200",

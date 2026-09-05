@@ -44,11 +44,15 @@ ongoing outage.
 If the build succeeded but deployment did not, check whether they are deploying
 to Test or Live — and then check the tag format.
 
-**Tags must contain an integer that increments with each deployment.** A
-badly formatted tag fails the deployment.
+**Tags must carry the environment prefix and an integer that increments with
+each deployment.** A badly formatted tag fails the deployment.
 
-- Test: `test-<integer>`
-- Live: `live-<integer>`
+- Test: `pantheon_test_<integer>`
+- Live: `pantheon_live_<integer>`
+
+A tag points at a commit rather than a branch, so whatever is tagged is what
+deploys. If the customer tagged the wrong commit, the deployment can succeed
+while shipping something they did not expect.
 
 If the failure references the GitHub app — a connection timeout, an
 authorization error — have the customer reinstall the Pantheon GitHub

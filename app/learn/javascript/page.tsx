@@ -129,7 +129,7 @@ const truncate = (text, max = 80) => text.slice(0, max);`}</code>
 
       <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <p>
-          The one to internalise is <code>map</code>, because JSX uses it
+          The one to internalize is <code>map</code>, because JSX uses it
           constantly. Rendering a list of posts is just mapping each post to
           some markup — exactly what{" "}
           <span><code>app/blog/page.tsx</code>

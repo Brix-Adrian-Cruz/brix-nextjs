@@ -44,7 +44,7 @@ scope, but you can still audit and unblock the customer — see
 
 ## If you cannot place it
 
-Post in the Next.js support channel with:
+Post in `#ask-nextjs` with:
 
 - The site name
 - The affected environment
