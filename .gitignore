@@ -1,3 +1,12 @@
 node_modules
 .DS_Store
 .next/*
+
+# Environment files — never commit these, they hold secrets
+.env
+.env.local
+.env*.local
+
+# Build output
+/out
+*.tsbuildinfo

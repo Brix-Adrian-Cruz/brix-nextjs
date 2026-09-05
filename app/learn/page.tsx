@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BuildLog from "@/components/learn/BuildLog";
 import Callout from "@/components/learn/Callout";
 import { levels } from "@/data/learnNav";
 
@@ -68,6 +69,18 @@ export default function LearnPage() {
           </section>
         ))}
       </div>
+
+      <section className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-800">
+        <h2 className="text-xl font-bold tracking-tight">
+          How this site was built
+        </h2>
+        <p className="mt-1 text-gray-600 dark:text-gray-400">
+          Every step taken to get from an empty starter to what you are reading,
+          in order. The lessons above cover each one properly.
+        </p>
+
+        <BuildLog />
+      </section>
 
       <Callout variant="note" title="Getting unstuck">
         <p>
