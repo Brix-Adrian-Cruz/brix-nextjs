@@ -3,27 +3,33 @@ import PostListItem from "@/components/PostListItem";
 import { getAllPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "All posts.",
+  title: "Playbooks",
+  description: "Every runbook for handling Next.js sites on Pantheon.",
 };
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
 
   return (
-    <div className="divide-y divide-gray-200 dark:divide-gray-800">
-      <header className="space-y-2 pb-8 pt-6">
-        <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          All posts
+    <div className="py-6">
+      <header className="mb-8 border-b border-slate-200 pb-6 dark:border-slate-800">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+          {posts.length} {posts.length === 1 ? "playbook" : "playbooks"}
+        </p>
+        <h1 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Playbooks
         </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          {posts.length} {posts.length === 1 ? "post" : "posts"}
+        <p className="mt-2 text-slate-600 dark:text-slate-400">
+          Work top to bottom, or jump straight to the layer you have already
+          isolated.
         </p>
       </header>
 
-      {posts.map((post) => (
-        <PostListItem key={post.slug} post={post} />
-      ))}
+      <div className="grid gap-4 sm:grid-cols-2">
+        {posts.map((post) => (
+          <PostListItem key={post.slug} post={post} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>The problem it solves</h2>
         <p>
           By default Next.js caches in the instance&apos;s own memory and
@@ -126,7 +126,7 @@ cacheMaxMemorySize: 0,`}</code>
         </p>
       </Callout>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Proving it works</h2>
         <p>
           &quot;It built successfully&quot; is not evidence. Three checks, in

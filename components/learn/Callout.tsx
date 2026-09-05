@@ -4,7 +4,7 @@ const styles: Record<Variant, { label: string; className: string }> = {
   note: {
     label: "Note",
     className:
-      "border-gray-300 bg-gray-50 dark:border-gray-700 dark:bg-gray-900/60",
+      "border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/60",
   },
   tip: {
     label: "Tip",
@@ -19,7 +19,7 @@ const styles: Record<Variant, { label: string; className: string }> = {
   verify: {
     label: "Verify before relying on this",
     className:
-      "border-dashed border-gray-400 bg-transparent dark:border-gray-600",
+      "border-dashed border-slate-400 bg-transparent dark:border-slate-600",
   },
 };
 
@@ -36,10 +36,10 @@ export default function Callout({
 
   return (
     <aside className={`my-6 rounded-lg border-l-4 p-4 ${style.className}`}>
-      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">
+      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">
         {title ?? style.label}
       </p>
-      <div className="prose prose-sm prose-gray max-w-none dark:prose-invert prose-p:my-2">
+      <div className="prose prose-sm prose-slate max-w-none dark:prose-invert prose-p:my-2">
         {children}
       </div>
     </aside>

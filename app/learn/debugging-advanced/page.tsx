@@ -16,7 +16,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Identifying a page&apos;s rendering technique</h2>
         <p>Three ways, from most to least authoritative.</p>
 
@@ -92,7 +92,7 @@ export default function Page() {
         </p>
       </Callout>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Outbound request patterns in nginx-access</h2>
         <p>
           The access log answers a question the application logs cannot: what is

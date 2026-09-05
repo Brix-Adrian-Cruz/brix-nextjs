@@ -2,33 +2,35 @@
 // the header, footer, page metadata, and the about page.
 
 export const siteMetadata = {
-  title: "Brix's Blog",
-  author: "Brix Adrian Cruz",
-  headerTitle: "Brix's Blog",
+  title: "Next.js Support Playbooks",
+  shortTitle: "Playbooks",
+  // Shown as the byline on posts. Kept as a team rather than a person, since
+  // these are operational runbooks rather than personal writing.
+  author: "Support Engineering",
+  headerTitle: "Next.js Playbooks",
   description:
-    "Notes on Next.js, web performance, and building things on the web.",
+    "Runbooks for handling Next.js sites on Pantheon: triage, logs, build failures, caching, and escalation.",
   language: "en-us",
-  siteUrl: "https://example.com",
+  siteUrl: "",
   locale: "en-US",
-  // Shown on the home page hero and the about page.
-  occupation: "Web Engineer",
-  company: "Pantheon",
-  bio: "I build and maintain fast websites. Here I write about Next.js, caching, and the small details that make the web feel quick.",
-  // Set any of these to an empty string to hide the icon.
-  email: "you@example.com",
-  github: "https://github.com/",
-  linkedin: "https://www.linkedin.com/",
-  x: "https://x.com/",
+  tagline: "Triage, diagnose, escalate.",
+  intro:
+    "Field guides for Next.js sites on Pantheon. Start with triage to work out which layer owns the problem, then follow the playbook for that layer.",
+  // Set any of these to an empty string to hide the link.
+  email: "",
+  github: "",
+  linkedin: "",
+  x: "",
 };
 
 // Links shown in the site header.
 export const headerNavLinks = [
-  { href: "/blog", title: "Blog" },
+  { href: "/blog", title: "Playbooks" },
   { href: "/news", title: "News" },
   { href: "/learn", title: "Learn" },
-  { href: "/tags", title: "Tags" },
+  { href: "/tags", title: "Topics" },
   { href: "/about", title: "About" },
 ];
 
-// How many posts to show on the home page.
-export const POSTS_ON_HOME_PAGE = 5;
+// How many playbooks to show on the home page.
+export const POSTS_ON_HOME_PAGE = 8;

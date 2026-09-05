@@ -37,11 +37,11 @@ export default async function NewsPage() {
 
   return (
     <div className="py-6">
-      <header className="mb-8 border-b border-gray-200 pb-6 dark:border-gray-800">
+      <header className="mb-8 border-b border-slate-200 pb-6 dark:border-slate-800">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
           News
         </h1>
-        <p className="mt-2 text-gray-600 dark:text-gray-400">
+        <p className="mt-2 text-slate-600 dark:text-slate-400">
           Sourced from WordPress over WPGraphQL.
         </p>
       </header>
@@ -49,16 +49,16 @@ export default async function NewsPage() {
       {error && <SetupNotice error={error} />}
 
       {!error && posts.length === 0 && (
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-slate-600 dark:text-slate-400">
           Connected, but the backend returned no published posts yet.
         </p>
       )}
 
-      <div className="divide-y divide-gray-200 dark:divide-gray-800">
+      <div className="divide-y divide-slate-200 dark:divide-slate-800">
         {posts.map((post) => (
           <article key={post.slug} className="py-8">
             <div className="grid gap-4 md:grid-cols-4">
-              <p className="text-sm text-gray-500 md:col-span-1 dark:text-gray-400">
+              <p className="text-sm text-slate-500 md:col-span-1 dark:text-slate-400">
                 <time dateTime={post.date}>{formatWpDate(post.date)}</time>
               </p>
 
@@ -86,12 +86,12 @@ export default async function NewsPage() {
                 )}
 
                 {post.excerpt && (
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-slate-600 dark:text-slate-400">
                     {post.excerpt}
                   </p>
                 )}
 
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-slate-500 dark:text-slate-400">
                   By {post.author}
                 </p>
               </div>

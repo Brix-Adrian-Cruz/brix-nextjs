@@ -15,7 +15,7 @@ export default function RefreshHint({ note }: { note: string }) {
       >
         Refresh this page
       </button>
-      <p className="text-sm text-gray-600 dark:text-gray-400">{note}</p>
+      <p className="text-sm text-slate-600 dark:text-slate-400">{note}</p>
     </div>
   );
 }

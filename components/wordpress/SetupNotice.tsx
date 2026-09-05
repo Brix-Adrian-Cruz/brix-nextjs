@@ -10,7 +10,7 @@ export default function SetupNotice({ error }: { error?: string }) {
         </p>
       )}
 
-      <div className="prose prose-sm prose-gray mt-4 max-w-none dark:prose-invert">
+      <div className="prose prose-sm prose-slate mt-4 max-w-none dark:prose-invert">
         <p>To connect the backend:</p>
         <ol>
           <li>

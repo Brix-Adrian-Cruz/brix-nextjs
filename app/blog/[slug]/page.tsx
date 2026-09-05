@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Tag from "@/components/Tag";
+import TopicBadge from "@/components/TopicBadge";
 import { siteMetadata } from "@/data/siteMetadata";
 import { formatDate, getAllPosts, getPostBySlug } from "@/lib/posts";
 
@@ -39,16 +39,16 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <article>
-      <header className="space-y-4 border-b border-gray-200 pb-8 pt-6 dark:border-gray-800">
+      <header className="space-y-4 border-b border-slate-200 pb-8 pt-6 dark:border-slate-800">
         <div className="flex flex-wrap gap-3">
           {post.tags.map((tag) => (
-            <Tag key={tag} text={tag} />
+            <TopicBadge key={tag} text={tag} />
           ))}
         </div>
         <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
           {post.title}
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="font-mono text-xs text-slate-500 dark:text-slate-500">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
           <span aria-hidden="true"> · </span>
           {post.readingTime} min read
@@ -59,15 +59,15 @@ export default async function PostPage({ params }: Props) {
 
       {/* The `prose` class styles everything the Markdown produced. */}
       <div
-        className="prose prose-gray max-w-none py-8 dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400"
+        className="prose prose-slate max-w-none py-8 dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400"
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
 
-      <nav className="grid gap-4 border-t border-gray-200 pt-8 sm:grid-cols-2 dark:border-gray-800">
+      <nav className="grid gap-4 border-t border-slate-200 pt-8 sm:grid-cols-2 dark:border-slate-800">
         <div>
           {older && (
             <>
-              <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-500">
                 Previous post
               </p>
               <Link
@@ -82,7 +82,7 @@ export default async function PostPage({ params }: Props) {
         <div className="sm:text-right">
           {newer && (
             <>
-              <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-500">
                 Next post
               </p>
               <Link
@@ -101,7 +101,7 @@ export default async function PostPage({ params }: Props) {
           href="/blog"
           className="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
         >
-          ← Back to the blog
+          ← All playbooks
         </Link>
       </div>
     </article>

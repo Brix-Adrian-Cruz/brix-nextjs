@@ -48,7 +48,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <p>
           Choosing a rendering strategy is choosing <em>when</em> the HTML is
           produced. That single decision drives your page speed, your build
@@ -65,10 +65,10 @@ export default function Page() {
           <li key={demo.href}>
             <Link
               href={demo.href}
-              className="block h-full rounded-lg border border-gray-200 p-4 hover:border-primary-500 dark:border-gray-800 dark:hover:border-primary-400"
+              className="block h-full rounded-lg border border-slate-200 p-4 hover:border-primary-500 dark:border-slate-800 dark:hover:border-primary-400"
             >
               <span className="block font-semibold">{demo.name}</span>
-              <span className="mt-1 block text-sm text-gray-600 dark:text-gray-400">
+              <span className="mt-1 block text-sm text-slate-600 dark:text-slate-400">
                 {demo.when}
               </span>
               <span className="mt-2 block text-xs font-medium text-primary-600 dark:text-primary-400">
@@ -82,7 +82,7 @@ export default function Page() {
       <div className="my-6 overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="border-b border-gray-300 text-left dark:border-gray-700">
+            <tr className="border-b border-slate-300 text-left dark:border-slate-700">
               <th className="py-2 pr-4 font-semibold">Strategy</th>
               <th className="py-2 pr-4 font-semibold">Rendered</th>
               <th className="py-2 font-semibold">Reach for it when</th>
@@ -92,7 +92,7 @@ export default function Page() {
             {DEMOS.map((demo) => (
               <tr
                 key={demo.href}
-                className="border-b border-gray-200 dark:border-gray-800"
+                className="border-b border-slate-200 dark:border-slate-800"
               >
                 <td className="py-3 pr-4 font-semibold">{demo.name}</td>
                 <td className="py-3 pr-4">{demo.when}</td>
@@ -103,7 +103,7 @@ export default function Page() {
         </table>
       </div>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>How to choose</h2>
         <p>
           Ask how often the underlying data changes, not how often the page is

@@ -18,7 +18,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Variables and data types</h2>
         <p>
           Use <code>const</code> by default and <code>let</code> only when you
@@ -127,14 +127,13 @@ const truncate = (text, max = 80) => text.slice(0, max);`}</code>
         <ArrayOpsDemo />
       </Demo>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <p>
           The one to internalise is <code>map</code>, because JSX uses it
           constantly. Rendering a list of posts is just mapping each post to
           some markup — exactly what{" "}
-          <a href="https://github.com/Brix-Adrian-Cruz/brix-nextjs/blob/main/app/blog/page.tsx">
-            <code>app/blog/page.tsx</code>
-          </a>{" "}
+          <span><code>app/blog/page.tsx</code>
+          </span>{" "}
           in this repo does:
         </p>
 

@@ -58,7 +58,7 @@ export default function ArrayOpsDemo() {
             className={`rounded-md px-3 py-1.5 font-mono text-sm ${
               op === key
                 ? "bg-primary-600 text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                : "bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
             }`}
           >
             .{key}()
@@ -67,24 +67,24 @@ export default function ArrayOpsDemo() {
       </div>
 
       <div>
-        <p className="mb-1 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+        <p className="mb-1 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
           The code
         </p>
-        <pre className="overflow-x-auto rounded-md bg-gray-900 p-3 text-sm text-gray-100">
+        <pre className="overflow-x-auto rounded-md bg-slate-900 p-3 text-sm text-slate-100">
           <code>{CODE[op]}</code>
         </pre>
       </div>
 
       <div>
-        <p className="mb-1 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+        <p className="mb-1 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
           What comes back
         </p>
-        <pre className="overflow-x-auto rounded-md border border-gray-200 p-3 text-sm dark:border-gray-800">
+        <pre className="overflow-x-auto rounded-md border border-slate-200 p-3 text-sm dark:border-slate-800">
           <code>{JSON.stringify(result, null, 2)}</code>
         </pre>
       </div>
 
-      <p className="text-sm text-gray-600 dark:text-gray-400">
+      <p className="text-sm text-slate-600 dark:text-slate-400">
         {EXPLANATION[op]}
       </p>
     </div>

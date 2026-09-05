@@ -23,7 +23,7 @@ async function BuildTime() {
 
 export default function Page() {
   return (
-    <article className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+    <article className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
       <h1>Static</h1>
       <p>
         The timestamp below was produced when this page was built. Refresh as

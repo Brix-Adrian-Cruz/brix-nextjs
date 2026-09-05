@@ -17,7 +17,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Why any of this exists</h2>
         <p>
           JavaScript runs on a single thread. If fetching a CMS response blocked
@@ -67,7 +67,7 @@ export default function Page() {
         </p>
       </Callout>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Sequential vs parallel</h2>
         <p>
           This is the single highest-value thing on this page. Two requests that
@@ -83,7 +83,7 @@ export default function Page() {
         <AsyncDemo />
       </Demo>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <p>
           The trap is a loop. This looks reasonable and is roughly N times
           slower than it needs to be:
@@ -111,9 +111,8 @@ const posts = await Promise.all(ids.map((id) => getPost(id)));`}</code>
           Server components can be <code>async</code> and awaited directly,
           which is why data loading in the App Router looks so plain. This
           site&apos;s own post loader in{" "}
-          <a href="https://github.com/Brix-Adrian-Cruz/brix-nextjs/blob/main/lib/posts.ts">
-            <code>lib/posts.ts</code>
-          </a>{" "}
+          <span><code>lib/posts.ts</code>
+          </span>{" "}
           reads every markdown file in parallel for exactly the reason above:
         </p>
 

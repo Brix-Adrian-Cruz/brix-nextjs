@@ -25,7 +25,7 @@ async function CachedTime() {
 
 export default function Page() {
   return (
-    <article className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+    <article className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
       <h1>Revalidated</h1>
       <p>
         The middle ground, and the one most content sites should be using.

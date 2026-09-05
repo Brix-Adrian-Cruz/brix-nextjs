@@ -66,7 +66,7 @@ const STEPS: {
     title: "Set environment variables per environment",
     detail:
       "terminus secret:site:set, so Test reads the test CMS and Live reads the live one. A site-level default must exist before per-environment overrides work.",
-    artifact: "terminus secret:site:set brix-nextjs.live WORDPRESS_API_URL ...",
+    artifact: "terminus secret:site:set <site>.live WORDPRESS_API_URL ...",
     lesson: { href: "/learn/secrets", label: "Secrets" },
   },
 ];
@@ -85,14 +85,14 @@ export default function BuildLog() {
 
           <div className="min-w-0">
             <p className="font-semibold">{step.title}</p>
-            <p className="mt-0.5 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-400">
               {step.detail}
             </p>
 
             {(step.artifact || step.lesson) && (
               <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                 {step.artifact && (
-                  <code className="break-all rounded bg-gray-100 px-1.5 py-0.5 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                  <code className="break-all rounded bg-slate-100 px-1.5 py-0.5 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
                     {step.artifact}
                   </code>
                 )}

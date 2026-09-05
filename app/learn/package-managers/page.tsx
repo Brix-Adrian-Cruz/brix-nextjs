@@ -50,7 +50,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <p>
           All four read the same <code>package.json</code> and install from the
           same npm registry. They differ in how they lay out{" "}
@@ -62,7 +62,7 @@ export default function Page() {
       <div className="my-6 overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="border-b border-gray-300 text-left dark:border-gray-700">
+            <tr className="border-b border-slate-300 text-left dark:border-slate-700">
               <th className="py-2 pr-4 font-semibold">Manager</th>
               <th className="py-2 pr-4 font-semibold">Lockfile</th>
               <th className="py-2 pr-4 font-semibold">Add a package</th>
@@ -73,7 +73,7 @@ export default function Page() {
             {MANAGERS.map((m) => (
               <tr
                 key={m.name}
-                className="border-b border-gray-200 align-top dark:border-gray-800"
+                className="border-b border-slate-200 align-top dark:border-slate-800"
               >
                 <td className="py-3 pr-4 font-semibold">{m.name}</td>
                 <td className="py-3 pr-4 font-mono text-xs">{m.lockfile}</td>
@@ -85,7 +85,7 @@ export default function Page() {
         </table>
       </div>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <ul>
           {MANAGERS.map((m) => (
             <li key={m.name}>

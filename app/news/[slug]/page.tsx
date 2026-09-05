@@ -50,7 +50,7 @@ async function PostBody({ params }: Props) {
 
   return (
     <>
-      <header className="space-y-3 border-b border-gray-200 pb-6 dark:border-gray-800">
+      <header className="space-y-3 border-b border-slate-200 pb-6 dark:border-slate-800">
         {post.categories.length > 0 && (
           <div className="flex flex-wrap gap-3">
             {post.categories.map((category) => (
@@ -68,7 +68,7 @@ async function PostBody({ params }: Props) {
           {post.title}
         </h1>
 
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           <time dateTime={post.date}>{formatWpDate(post.date)}</time>
           <span aria-hidden="true"> · </span>
           {post.author}
@@ -77,7 +77,7 @@ async function PostBody({ params }: Props) {
 
       {/* WordPress returns rendered HTML, which we style with `prose`. */}
       <div
-        className="prose prose-gray max-w-none py-8 dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400"
+        className="prose prose-slate max-w-none py-8 dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
     </>
@@ -87,12 +87,12 @@ async function PostBody({ params }: Props) {
 function LoadingPost() {
   return (
     <div className="animate-pulse space-y-4 py-6">
-      <div className="h-9 w-3/4 rounded bg-gray-200 dark:bg-gray-800" />
-      <div className="h-4 w-40 rounded bg-gray-200 dark:bg-gray-800" />
+      <div className="h-9 w-3/4 rounded bg-slate-200 dark:bg-slate-800" />
+      <div className="h-4 w-40 rounded bg-slate-200 dark:bg-slate-800" />
       <div className="space-y-2 pt-6">
-        <div className="h-4 w-full rounded bg-gray-200 dark:bg-gray-800" />
-        <div className="h-4 w-full rounded bg-gray-200 dark:bg-gray-800" />
-        <div className="h-4 w-2/3 rounded bg-gray-200 dark:bg-gray-800" />
+        <div className="h-4 w-full rounded bg-slate-200 dark:bg-slate-800" />
+        <div className="h-4 w-full rounded bg-slate-200 dark:bg-slate-800" />
+        <div className="h-4 w-2/3 rounded bg-slate-200 dark:bg-slate-800" />
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Environments come from git tags</h2>
         <p>
           This is the part that surprises people arriving from other hosts. You
@@ -51,7 +51,7 @@ git push origin pantheon_live_1`}</code>
         </p>
       </Callout>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Locking an environment</h2>
         <p>
           Test environments are publicly reachable by default. Locking one puts
@@ -122,7 +122,7 @@ git push origin pantheon_live_1`}</code>
         </p>
       </Callout>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Reading a build log</h2>
         <p>
           Read it top-down and stop at the <em>first</em> error. Later errors

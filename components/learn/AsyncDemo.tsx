@@ -89,15 +89,15 @@ export default function AsyncDemo() {
           type="button"
           onClick={runFailing}
           disabled={running}
-          className="rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium hover:bg-gray-100 disabled:opacity-50 dark:border-gray-700 dark:hover:bg-gray-800"
+          className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium hover:bg-slate-100 disabled:opacity-50 dark:border-slate-700 dark:hover:bg-slate-800"
         >
           Handle a rejection
         </button>
       </div>
 
-      <ul className="min-h-24 space-y-1 rounded-md border border-gray-200 p-3 font-mono text-sm dark:border-gray-800">
+      <ul className="min-h-24 space-y-1 rounded-md border border-slate-200 p-3 font-mono text-sm dark:border-slate-800">
         {log.length === 0 && (
-          <li className="text-gray-500 dark:text-gray-400">
+          <li className="text-slate-500 dark:text-slate-400">
             Press a button — each request takes 600ms.
           </li>
         )}
@@ -108,7 +108,7 @@ export default function AsyncDemo() {
               entry.kind === "error"
                 ? "text-red-600 dark:text-red-400"
                 : entry.kind === "start"
-                  ? "text-gray-500 dark:text-gray-400"
+                  ? "text-slate-500 dark:text-slate-400"
                   : ""
             }
           >
@@ -117,7 +117,7 @@ export default function AsyncDemo() {
         ))}
       </ul>
 
-      <p className="text-sm text-gray-600 dark:text-gray-400">
+      <p className="text-sm text-slate-600 dark:text-slate-400">
         Two 600ms requests take about 1200ms when awaited one after the other,
         and about 600ms with <code>Promise.all</code>. Awaiting in a loop when
         the requests do not depend on each other is the most common cause of a

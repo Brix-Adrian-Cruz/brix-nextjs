@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import PostListItem from "@/components/PostListItem";
 import { POSTS_ON_HOME_PAGE, siteMetadata } from "@/data/siteMetadata";
@@ -9,45 +10,74 @@ export default async function Home() {
 
   return (
     <>
-      <section className="space-y-4 border-b border-gray-200 pb-10 pt-6 dark:border-gray-800">
-        <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
-          Hi, I&apos;m {siteMetadata.author}
-        </h1>
-        <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-400">
-          {siteMetadata.bio}
-        </p>
+      {/* Hero. The image sits behind a heavy overlay so text stays legible
+          in both themes without needing two crops. */}
+      <section className="relative -mx-4 mb-12 overflow-hidden sm:-mx-6 sm:rounded-xl">
+        <Image
+          src="/images/hero-datacenter.jpg"
+          alt=""
+          width={640}
+          height={360}
+          priority
+          className="h-64 w-full object-cover sm:h-80"
+        />
+        <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/95 via-slate-950/85 to-primary-950/70" />
+
+        <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-10">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary-300">
+            {siteMetadata.tagline}
+          </p>
+          <h1 className="mt-3 max-w-2xl text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
+            {siteMetadata.title}
+          </h1>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
+            {siteMetadata.intro}
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/blog/where-to-start-nextjs-problems"
+              className="rounded-md bg-primary-500 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-400"
+            >
+              Start with triage
+            </Link>
+            <Link
+              href="/blog"
+              className="rounded-md border border-slate-500 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-white/10"
+            >
+              All playbooks
+            </Link>
+          </div>
+        </div>
       </section>
 
-      <section className="divide-y divide-gray-200 dark:divide-gray-800">
-        <h2 className="pt-8 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-          Latest posts
-        </h2>
+      <section>
+        <div className="mb-5 flex items-baseline justify-between">
+          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+            Playbooks
+          </h2>
+          {posts.length > POSTS_ON_HOME_PAGE && (
+            <Link
+              href="/blog"
+              className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-400"
+            >
+              View all
+            </Link>
+          )}
+        </div>
 
         {recentPosts.length === 0 ? (
-          <p className="py-10 text-gray-600 dark:text-gray-400">
-            No posts yet. Add a Markdown file to{" "}
-            <code className="rounded bg-gray-100 px-1 py-0.5 text-sm dark:bg-gray-800">
-              content/blog/
-            </code>{" "}
-            to get started.
+          <p className="text-slate-600 dark:text-slate-400">
+            No playbooks yet. Add a Markdown file to <code>content/blog/</code>.
           </p>
         ) : (
-          recentPosts.map((post) => (
-            <PostListItem key={post.slug} post={post} />
-          ))
+          <div className="grid gap-4 sm:grid-cols-2">
+            {recentPosts.map((post) => (
+              <PostListItem key={post.slug} post={post} />
+            ))}
+          </div>
         )}
       </section>
-
-      {posts.length > POSTS_ON_HOME_PAGE && (
-        <div className="flex justify-end pt-6">
-          <Link
-            href="/blog"
-            className="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-          >
-            All posts →
-          </Link>
-        </div>
-      )}
     </>
   );
 }

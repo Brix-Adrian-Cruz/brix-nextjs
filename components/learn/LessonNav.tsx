@@ -11,11 +11,11 @@ export default function LessonNav({ href }: { href: string }) {
       : undefined;
 
   return (
-    <nav className="mt-12 grid gap-4 border-t border-gray-200 pt-6 sm:grid-cols-2 dark:border-gray-800">
+    <nav className="mt-12 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-2 dark:border-slate-800">
       <div>
         {previous && (
           <>
-            <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
               Previous
             </p>
             <Link
@@ -30,7 +30,7 @@ export default function LessonNav({ href }: { href: string }) {
       <div className="sm:text-right">
         {next && (
           <>
-            <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
               Next
             </p>
             <Link

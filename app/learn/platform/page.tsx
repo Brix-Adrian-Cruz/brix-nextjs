@@ -16,7 +16,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>How to tell you are on a Next.js site</h2>
         <p>
           Worth being able to do in a few seconds, because it decides which
@@ -89,7 +89,7 @@ export default function Page() {
         </p>
       </Callout>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <ul>
           <li>
             <strong>In-memory state does not persist</strong> across requests or

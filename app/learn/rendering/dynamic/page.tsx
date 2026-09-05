@@ -22,16 +22,16 @@ async function RequestTime() {
 
 function Skeleton() {
   return (
-    <div className="my-4 animate-pulse rounded-lg border border-gray-200 p-4 dark:border-gray-800">
-      <div className="h-3 w-24 rounded bg-gray-200 dark:bg-gray-700" />
-      <div className="mt-3 h-7 w-32 rounded bg-gray-200 dark:bg-gray-700" />
+    <div className="my-4 animate-pulse rounded-lg border border-slate-200 p-4 dark:border-slate-800">
+      <div className="h-3 w-24 rounded bg-slate-200 dark:bg-slate-700" />
+      <div className="mt-3 h-7 w-32 rounded bg-slate-200 dark:bg-slate-700" />
     </div>
   );
 }
 
 export default function Page() {
   return (
-    <article className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+    <article className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
       <h1>Dynamic</h1>
       <p>
         This timestamp is generated while the request is being handled. Refresh

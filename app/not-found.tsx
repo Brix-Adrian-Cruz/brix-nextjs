@@ -7,7 +7,7 @@ export default function NotFound() {
         404
       </p>
       <h1 className="text-2xl font-bold">This page could not be found.</h1>
-      <p className="text-gray-600 dark:text-gray-400">
+      <p className="text-slate-600 dark:text-slate-400">
         The link may be broken, or the post may have been renamed.
       </p>
       <Link

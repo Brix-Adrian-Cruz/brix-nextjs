@@ -23,10 +23,10 @@ export default function SidebarNav() {
 
       {levels.map((level) => (
         <div key={level.title}>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
             {level.title}
           </p>
-          <ul className="space-y-1 border-l border-gray-200 dark:border-gray-800">
+          <ul className="space-y-1 border-l border-slate-200 dark:border-slate-800">
             {level.lessons.map((lesson) => {
               const active = pathname === lesson.href;
               return (
@@ -37,7 +37,7 @@ export default function SidebarNav() {
                     className={`-ml-px block border-l py-1 pl-3 ${
                       active
                         ? "border-primary-500 font-medium text-primary-600 dark:text-primary-400"
-                        : "border-transparent text-gray-600 hover:border-gray-400 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                        : "border-transparent text-slate-600 hover:border-slate-400 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
                     }`}
                   >
                     {lesson.title}

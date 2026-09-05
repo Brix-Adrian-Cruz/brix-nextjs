@@ -15,7 +15,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <p>
           Decoupled means the CMS stores and edits content while Next.js renders
           it. The CMS exposes an API; your site is a client of that API. This
@@ -104,7 +104,7 @@ const titles = data.map((node) => node.attributes.title);`}</code>
         </p>
       </Callout>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Handle missing content deliberately</h2>
         <pre>
           <code>{`import { notFound } from "next/navigation";
