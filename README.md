@@ -181,6 +181,31 @@ All WordPress access goes through `lib/wordpress.ts`, which normalizes
 responses so components never see CMS-shaped objects. See `/learn/cms` for the
 reasoning.
 
+### Persisted queries
+
+Queries are sent to WordPress by ID rather than by text, which is what lets
+Pantheon's CDN cache them. The backend needs two plugins active for this —
+[WPGraphQL Smart Cache](https://wordpress.org/plugins/wpgraphql-smart-cache/)
+to store the query documents, and Pantheon Advanced Page Cache to purge the
+edge when content changes.
+
+Nothing is generated at build time and there is no manifest to keep in sync.
+The ID is the sha256 of the query text in `lib/wordpress.ts`, and the first
+request an environment makes with an unfamiliar ID sends the query text along
+with it, which registers the document and returns the result in one round
+trip. Every request after that is a plain `GET` carrying only the ID.
+
+Two consequences worth knowing:
+
+- **Editing a query registers a new document.** The hash changes with the
+  text, so the old document is orphaned rather than overwritten. Old documents
+  accumulate in WordPress; Smart Cache's "Delete Old Queries" setting can
+  garbage-collect them.
+- **A registration miss is briefly sticky.** The `PersistedQueryNotFound`
+  response is itself cached at the edge for the max-age, so for a few minutes
+  after a query changes some requests take the POST path. They return correct
+  data — they just are not edge-cached until the error expires.
+
 ## Deploying to Pantheon
 
 The project is configured as a Pantheon Next.js Site: `output: 'standalone'`

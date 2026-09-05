@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { cacheLife } from "next/cache";
 
 /**
@@ -28,6 +29,62 @@ export type WpPostDetail = WpPost & {
 export class WordPressError extends Error {}
 
 /**
+ * Query documents are sent by ID, not by text.
+ *
+ * WPGraphQL Smart Cache stores each query document in WordPress under an ID,
+ * so a request can name the query instead of carrying it. That is what makes
+ * these requests cacheable: Smart Cache deliberately skips its object cache
+ * for GET requests and leaves them to the CDN, and an ID is short enough to
+ * put in a URL when a whole query is not. A POST is never edge-cached.
+ *
+ * The ID is the sha256 of the query text below. Editing a query changes its
+ * hash, so it registers as a new document instead of colliding with the one
+ * the old text registered. WordPress also stores its own hash of the parsed
+ * and reprinted query; ours is recorded alongside it as an alias.
+ */
+const queryIds = new Map<string, string>();
+
+function queryId(query: string): string {
+  const known = queryIds.get(query);
+  if (known) return known;
+
+  const id = createHash("sha256").update(query).digest("hex");
+  queryIds.set(query, id);
+  return id;
+}
+
+/** WPGraphQL's reply when it does not have a document under that ID yet. */
+function isQueryUnknown(body: { errors?: { message?: string }[] }): boolean {
+  return Boolean(
+    body.errors?.some((error) => error.message === "PersistedQueryNotFound"),
+  );
+}
+
+/** One fetch, with the failure modes that are not exceptions turned into them. */
+async function send(
+  url: string,
+  init?: RequestInit,
+): Promise<{ data?: unknown; errors?: { message?: string }[] }> {
+  let response: Response;
+
+  try {
+    response = await fetch(url, init);
+  } catch (cause) {
+    // Network-level failure: wrong host, DNS, TLS, site asleep.
+    throw new WordPressError(`Could not reach ${endpoint}`, { cause });
+  }
+
+  // fetch does not throw on 4xx/5xx — check this yourself.
+  if (!response.ok) {
+    throw new WordPressError(
+      `WordPress returned ${response.status} ${response.statusText}`,
+    );
+  }
+
+  return response.json();
+}
+
+/**
  * One place that knows how to talk to WPGraphQL. Everything else calls the
  * typed helpers below.
  */
@@ -42,27 +99,27 @@ async function graphql<T>(
     );
   }
 
-  let response: Response;
+  const id = queryId(query);
+  const params = new URLSearchParams({
+    queryId: id,
+    variables: JSON.stringify(variables),
+  });
 
-  try {
-    response = await fetch(endpoint, {
+  // Ask by ID. This is the request the CDN can answer without waking
+  // WordPress, and the one every call after the first should be.
+  let body = await send(`${endpoint}?${params}`);
+
+  // The first time a given WordPress environment sees this query text, it has
+  // nothing stored under the ID. Sending the text and the ID together both
+  // registers the document and returns the result, so the miss costs one round
+  // trip rather than two.
+  if (isQueryUnknown(body)) {
+    body = await send(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query, variables }),
+      body: JSON.stringify({ queryId: id, query, variables }),
     });
-  } catch (cause) {
-    // Network-level failure: wrong host, DNS, TLS, site asleep.
-    throw new WordPressError(`Could not reach ${endpoint}`, { cause });
   }
-
-  // fetch does not throw on 4xx/5xx — check this yourself.
-  if (!response.ok) {
-    throw new WordPressError(
-      `WordPress returned ${response.status} ${response.statusText}`,
-    );
-  }
-
-  const body = await response.json();
 
   // GraphQL reports its own errors inside a 200 response.
   if (body.errors?.length) {
