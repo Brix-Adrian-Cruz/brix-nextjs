@@ -24,6 +24,7 @@ export const siteMetadata = {
 // Links shown in the site header.
 export const headerNavLinks = [
   { href: "/blog", title: "Blog" },
+  { href: "/learn", title: "Learn" },
   { href: "/tags", title: "Tags" },
   { href: "/about", title: "About" },
 ];
