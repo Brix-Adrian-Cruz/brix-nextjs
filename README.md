@@ -145,6 +145,32 @@ that will otherwise surprise you:
 Both rules are explained, with the real error messages, in
 `/learn/rendering`.
 
+## Connecting the WordPress backend
+
+Content under `/news` comes from a WordPress site over
+[WPGraphQL](https://www.wpgraphql.com/). Next.js needs one variable — the
+GraphQL endpoint, which is the WordPress URL plus `/graphql`.
+
+Set it **per environment**, so each Next.js environment reads the matching
+WordPress environment:
+
+| Next.js | Reads from | Set where |
+| --- | --- | --- |
+| Local | `https://dev-brix-nextjs-cms.pantheonsite.io/graphql` | `.env.local` |
+| Test | `https://test-brix-nextjs-cms.pantheonsite.io/graphql` | Pantheon Dashboard |
+| Live | `https://live-brix-nextjs-cms.pantheonsite.io/graphql` | Pantheon Dashboard |
+
+Locally, copy `.env.example` to `.env.local` and restart the dev server.
+`.env.local` is gitignored — never commit it.
+
+If a deployed environment shows the "WordPress is not connected" notice after
+you have set the variable, suspect a cached pre-configuration render before
+suspecting the config.
+
+All WordPress access goes through `lib/wordpress.ts`, which normalises
+responses so components never see CMS-shaped objects. See `/learn/cms` for the
+reasoning.
+
 ## Deploying to Pantheon
 
 The project is configured for Pantheon Front-End Sites: `output: 'standalone'`
