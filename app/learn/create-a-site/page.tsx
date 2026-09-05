@@ -16,7 +16,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <p>
           A Front-End Site on Pantheon is backed by a GitHub repository. You
           connect a GitHub account once per workspace, then each site points at
@@ -69,7 +69,7 @@ terminus site:create <site-name> <label> <upstream>`}</code>
         </p>
       </Callout>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>What the repo has to provide</h2>
         <p>
           A site will not build just because the code runs locally. Two things
@@ -106,8 +106,18 @@ const nextConfig: NextConfig = {
         <pre>
           <code>{`npm ci        # install exactly the lockfile, like the build does
 npm run build # the step that actually fails in CI
-npm start     # serve the production build`}</code>
+npm start     # serve that build the way the platform does`}</code>
         </pre>
+
+        <p>
+          One catch worth knowing before you rely on that last step. With{" "}
+          <code>output: &apos;standalone&apos;</code> set, <code>next start</code>{" "}
+          does not work — it warns and can serve an earlier build. This project
+          points <code>npm start</code> at{" "}
+          <code>.next/standalone/server.js</code> instead. On a project that has
+          not been set up that way, a passing local check can be showing you
+          stale output rather than the build you just made.
+        </p>
       </div>
 
       <Callout variant="tip" title="Check the Node version early">

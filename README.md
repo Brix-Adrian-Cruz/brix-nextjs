@@ -24,11 +24,21 @@ Open <http://localhost:3000>.
 | --- | --- |
 | `npm run dev` | Dev server with hot reload |
 | `npm run build` | Production build — stricter than dev, this is what CI runs |
-| `npm start` | Serve the production build |
+| `npm start` | Serve the production build the way Pantheon does |
 | `npm run lint` | ESLint |
 
 Before pushing, run `npm run build`. The dev server tolerates type and lint
 errors that will fail the build.
+
+> **`npm start` does not run `next start` here, and it must not.** This project
+> builds with `output: 'standalone'`, and `next start` does not support that —
+> it prints a warning and can serve output from an earlier build, which looks
+> exactly like a deploy that did not take. `npm start` runs
+> `scripts/serve-standalone.mjs` instead, which copies `public/` and
+> `.next/static` into `.next/standalone` (the platform serves those from its
+> CDN, so the build leaves them out) and then starts `.next/standalone/server.js`.
+> If you are reproducing a customer issue locally, this is the difference
+> between seeing what is deployed and seeing something stale.
 
 ## What's in it
 
@@ -156,9 +166,9 @@ WordPress environment:
 
 | Next.js | Reads from | Set where |
 | --- | --- | --- |
-| Local | `https://dev-brix-nextjs-cms.pantheonsite.io/graphql` | `.env.local` |
-| Test | `https://test-brix-nextjs-cms.pantheonsite.io/graphql` | Pantheon Dashboard |
-| Live | `https://live-brix-nextjs-cms.pantheonsite.io/graphql` | Pantheon Dashboard |
+| Local | `https://dev-<cms-site>.pantheonsite.io/graphql` | `.env.local` |
+| Test | `https://test-<cms-site>.pantheonsite.io/graphql` | Pantheon Dashboard |
+| Live | `https://live-<cms-site>.pantheonsite.io/graphql` | Pantheon Dashboard |
 
 Locally, copy `.env.example` to `.env.local` and restart the dev server.
 `.env.local` is gitignored — never commit it.

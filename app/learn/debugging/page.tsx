@@ -16,7 +16,7 @@ export default function Page() {
     <article>
       <LessonHeader href={HREF} />
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>First question: did it build, or is it failing to serve?</h2>
         <p>
           Answer this before anything else. The two failure classes have
@@ -28,35 +28,35 @@ export default function Page() {
       <div className="my-6 overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="border-b border-gray-300 text-left dark:border-gray-700">
+            <tr className="border-b border-slate-300 text-left dark:border-slate-700">
               <th className="py-2 pr-4 font-semibold">Symptom</th>
               <th className="py-2 pr-4 font-semibold">Class</th>
               <th className="py-2 font-semibold">Where to look</th>
             </tr>
           </thead>
           <tbody className="align-top">
-            <tr className="border-b border-gray-200 dark:border-gray-800">
+            <tr className="border-b border-slate-200 dark:border-slate-800">
               <td className="py-3 pr-4">
                 Deployment never completed; old version still serving
               </td>
               <td className="py-3 pr-4">Build</td>
               <td className="py-3">Build log, first error</td>
             </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-800">
+            <tr className="border-b border-slate-200 dark:border-slate-800">
               <td className="py-3 pr-4">
                 New version deployed, but pages 500
               </td>
               <td className="py-3 pr-4">Runtime</td>
               <td className="py-3">Runtime log at time of request</td>
             </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-800">
+            <tr className="border-b border-slate-200 dark:border-slate-800">
               <td className="py-3 pr-4">
                 Some pages fine, one route 500s
               </td>
               <td className="py-3 pr-4">Runtime</td>
               <td className="py-3">Runtime log, filtered to that path</td>
             </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-800">
+            <tr className="border-b border-slate-200 dark:border-slate-800">
               <td className="py-3 pr-4">
                 Worked locally, failed in CI immediately
               </td>
@@ -67,7 +67,7 @@ export default function Page() {
         </table>
       </div>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Root-causing a broken build</h2>
         <p>
           Builds fail in three phases, and naming the phase narrows the cause
@@ -136,9 +136,19 @@ export default function Page() {
           large share of &quot;only breaks on Pantheon&quot; issues reproduce
           immediately this way.
         </p>
+        <p>
+          Check what <code>npm start</code> actually runs first. On a build with{" "}
+          <code>output: &apos;standalone&apos;</code>, plain{" "}
+          <code>next start</code> does not serve the build you just made — it
+          warns and can hand back an earlier one. Serve{" "}
+          <code>.next/standalone/server.js</code> instead, after copying{" "}
+          <code>public/</code> and <code>.next/static</code> into{" "}
+          <code>.next/standalone</code>. Otherwise a &quot;cannot reproduce&quot;
+          may only mean you were looking at stale output.
+        </p>
       </Callout>
 
-      <div className="prose prose-gray max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
+      <div className="prose prose-slate max-w-none dark:prose-invert prose-a:text-primary-600 dark:prose-a:text-primary-400">
         <h2>Counting GitHub connections in a workspace</h2>
         <p>
           Useful when a repo will not appear during site creation, or when a
