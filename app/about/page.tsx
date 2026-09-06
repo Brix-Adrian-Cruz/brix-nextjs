@@ -56,6 +56,8 @@ export default function AboutPage() {
             alt="A network patch panel with structured cabling"
             width={720}
             height={1280}
+            // One column of a three-column grid from md up, full width below it.
+            sizes="(min-width: 1280px) 304px, (min-width: 768px) 224px, 100vw"
             className="rounded-lg border border-slate-200 object-cover dark:border-slate-800"
           />
           <p className="mt-2 font-mono text-[11px] text-slate-500 dark:text-slate-500">

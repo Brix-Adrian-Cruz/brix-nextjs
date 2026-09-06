@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PostListItem from "@/components/PostListItem";
-import { getAllPosts } from "@/lib/posts";
+import { getAllPostsMeta } from "@/lib/posts";
 
 export const metadata: Metadata = {
   title: "Playbooks",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const posts = await getAllPosts();
+  const posts = await getAllPostsMeta();
 
   return (
     <div className="py-6">

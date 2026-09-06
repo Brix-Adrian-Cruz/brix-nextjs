@@ -244,11 +244,14 @@ export async function getWpPostSlugs(first = 100): Promise<string[]> {
   return data.posts.nodes.map((node) => node.slug);
 }
 
+// Built once, for the same reason as the one in lib/posts.ts.
+const wpDateFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
 /** Formats WordPress' ISO date for display. */
 export function formatWpDate(date: string): string {
-  return new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  return wpDateFormatter.format(new Date(date));
 }

@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import PostListItem from "@/components/PostListItem";
 import { POSTS_ON_HOME_PAGE, siteMetadata } from "@/data/siteMetadata";
-import { getAllPosts } from "@/lib/posts";
+import { getAllPostsMeta } from "@/lib/posts";
 
 export default async function Home() {
-  const posts = await getAllPosts();
+  const posts = await getAllPostsMeta();
   const recentPosts = posts.slice(0, POSTS_ON_HOME_PAGE);
 
   return (
@@ -19,6 +19,8 @@ export default async function Home() {
           width={640}
           height={360}
           priority
+          // Full-bleed: the container width plus the negative margins either side.
+          sizes="(min-width: 1280px) 1088px, (min-width: 768px) 816px, 100vw"
           className="h-64 w-full object-cover sm:h-80"
         />
         <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/95 via-slate-950/85 to-primary-950/70" />

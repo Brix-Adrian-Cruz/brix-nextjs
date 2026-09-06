@@ -3,13 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import TopicBadge from "@/components/TopicBadge";
 import { siteMetadata } from "@/data/siteMetadata";
-import { formatDate, getAllPosts, getPostBySlug } from "@/lib/posts";
+import { formatDate, getAllPostsMeta, getPostBySlug } from "@/lib/posts";
 
 type Props = { params: Promise<{ slug: string }> };
 
 // Tells Next which post pages to build ahead of time.
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const posts = await getAllPostsMeta();
   return posts.map((post) => ({ slug: post.slug }));
 }
 
@@ -32,7 +32,7 @@ export default async function PostPage({ params }: Props) {
   if (!post) notFound();
 
   // Find the neighbouring posts so we can link to them at the bottom.
-  const posts = await getAllPosts();
+  const posts = await getAllPostsMeta();
   const index = posts.findIndex((p) => p.slug === post.slug);
   const newer = posts[index - 1];
   const older = posts[index + 1];

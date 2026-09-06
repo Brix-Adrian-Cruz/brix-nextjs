@@ -21,13 +21,17 @@ export type Post = PostMeta & {
   html: string;
 };
 
+// Built once. `toLocaleDateString` looks cheap but constructs a fresh
+// Intl formatter on every call, and list pages call it once per card.
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
 /** "2026-08-28" -> "August 28, 2026" */
 export function formatDate(date: string): string {
-  return new Date(`${date}T00:00:00`).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  return dateFormatter.format(new Date(`${date}T00:00:00`));
 }
 
 /** "Next JS" -> "next-js", so tags are safe to use in URLs. */
@@ -42,11 +46,15 @@ function estimateReadingTime(content: string): number {
 }
 
 /**
- * Reads every Markdown file in content/blog and returns them newest first.
- * The "use cache" directive means the files are only read and parsed once,
- * no matter how many pages ask for them.
+ * Frontmatter for every post, newest first.
+ *
+ * This deliberately does not render any Markdown. Every listing — the home
+ * page, /blog, /tags, the prev/next links — needs the frontmatter and nothing
+ * else, so running the Markdown parser over all of them would be work whose
+ * result is thrown away, and it would put every rendered body inside this
+ * cache entry for those pages to drag back out on a miss.
  */
-export async function getAllPosts(): Promise<Post[]> {
+export async function getAllPostsMeta(): Promise<PostMeta[]> {
   "use cache";
   cacheLife("blog");
 
@@ -69,7 +77,6 @@ export async function getAllPosts(): Promise<Post[]> {
           tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
           summary: String(data.summary ?? ""),
           readingTime: estimateReadingTime(content),
-          html: await marked.parse(content),
         };
       }),
   );
@@ -77,17 +84,31 @@ export async function getAllPosts(): Promise<Post[]> {
   return posts.sort((a, b) => b.date.localeCompare(a.date));
 }
 
-/** Returns a single post, or null when the slug doesn't match a file. */
+/**
+ * Returns a single post with its body rendered, or null when the slug doesn't
+ * match a file. This is the only path that runs the Markdown parser, and it
+ * runs it over one post rather than all of them.
+ */
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const posts = await getAllPosts();
-  return posts.find((post) => post.slug === slug) ?? null;
+  "use cache";
+  cacheLife("blog");
+
+  // Look the slug up instead of trusting it as a filename. It arrives from
+  // the URL, and a `..` in a path would otherwise read outside content/blog.
+  const meta = (await getAllPostsMeta()).find((post) => post.slug === slug);
+  if (!meta) return null;
+
+  const filePath = path.join(POSTS_DIRECTORY, `${slug}.md`);
+  const { content } = matter(await fs.readFile(filePath, "utf8"));
+
+  return { ...meta, html: await marked.parse(content) };
 }
 
 /** Every tag used across all posts, with a count, most used first. */
 export async function getAllTags(): Promise<
   { tag: string; slug: string; count: number }[]
 > {
-  const posts = await getAllPosts();
+  const posts = await getAllPostsMeta();
   const counts = new Map<string, number>();
 
   for (const post of posts) {
@@ -102,8 +123,8 @@ export async function getAllTags(): Promise<
 }
 
 /** All posts carrying the given tag slug. */
-export async function getPostsByTag(tagSlug: string): Promise<Post[]> {
-  const posts = await getAllPosts();
+export async function getPostsByTag(tagSlug: string): Promise<PostMeta[]> {
+  const posts = await getAllPostsMeta();
   return posts.filter((post) =>
     post.tags.some((tag) => slugifyTag(tag) === tagSlug),
   );
