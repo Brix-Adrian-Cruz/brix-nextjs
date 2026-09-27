@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { siteMetadata } from "@/data/siteMetadata";
 import NavLinks, { NavLinksFallback } from "./NavLinks";
 import ThemeToggle from "./ThemeToggle";
+import MobileNav from "./MobileNav";
 
 export default function Header() {
   return (
@@ -20,10 +21,13 @@ export default function Header() {
         </Link>
 
         <nav className="flex items-center gap-1 sm:gap-2">
-          <Suspense fallback={<NavLinksFallback />}>
-            <NavLinks />
-          </Suspense>
+          <div className="hidden items-center gap-1 sm:gap-2 md:flex">
+            <Suspense fallback={<NavLinksFallback />}>
+              <NavLinks />
+            </Suspense>
+          </div>
           <ThemeToggle />
+          <MobileNav />
         </nav>
       </div>
     </header>

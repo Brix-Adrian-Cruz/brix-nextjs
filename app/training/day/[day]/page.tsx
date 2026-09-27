@@ -7,6 +7,7 @@ import Notes from "../../_components/Notes";
 import Quiz from "../../_components/Quiz";
 import { DAYS, getDay } from "../../_data/course";
 import { WEEKS } from "../../_data/outline";
+import { highlightRawHtml } from "@/lib/highlightCode";
 
 // Pre-render all 30 days at build time (SSG). Any other day number calls notFound() → 404 by design.
 // Note: brix-nextjs has Cache Components enabled, which rejects `dynamicParams`, so the
@@ -30,6 +31,10 @@ export default async function DayPage({ params }: Props) {
   const d = getDay(Number(day));
   if (!d) notFound();
   const w = WEEKS[d.week - 1];
+  const [learnHtml, knowhowHtml] = await Promise.all([
+    highlightRawHtml(d.learn),
+    highlightRawHtml(d.knowhow),
+  ]);
 
   return (
     <div className="trn-layout">
@@ -48,7 +53,7 @@ export default async function DayPage({ params }: Props) {
 
         <section className="trn-blk">
           <h3><span className="trn-eyebrow">{"01"}</span>{"Learn"}</h3>
-          <div className="trn-learn" dangerouslySetInnerHTML={{ __html: d.learn }} />
+          <div className="trn-learn" dangerouslySetInnerHTML={{ __html: learnHtml }} />
         </section>
 
         <section className="trn-blk">
@@ -59,7 +64,7 @@ export default async function DayPage({ params }: Props) {
         <section className="trn-blk">
           <div className="trn-knowhow">
             <span className="trn-eyebrow">{"Support know-how"}</span>
-            <div dangerouslySetInnerHTML={{ __html: d.knowhow }} />
+            <div dangerouslySetInnerHTML={{ __html: knowhowHtml }} />
           </div>
         </section>
 

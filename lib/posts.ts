@@ -1,10 +1,31 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
-import { marked } from "marked";
+import { marked, type Tokens } from "marked";
 import { cacheLife } from "next/cache";
+import { highlightCodeToHtml } from "./highlightCode";
 
 const POSTS_DIRECTORY = path.join(process.cwd(), "content", "blog");
+
+// Fenced code blocks are highlighted with Shiki instead of left to Tailwind
+// Typography's plain `prose` styling. walkTokens runs (and can be awaited)
+// before rendering, so it's where the async highlight call has to happen;
+// the renderer override below just reads back what walkTokens produced.
+const highlightedCode = new WeakMap<Tokens.Code, string>();
+
+marked.use({
+  async: true,
+  async walkTokens(token) {
+    if (token.type !== "code") return;
+    const code = token as Tokens.Code;
+    highlightedCode.set(code, await highlightCodeToHtml(code.text, code.lang));
+  },
+  renderer: {
+    code(token) {
+      return highlightedCode.get(token) ?? false;
+    },
+  },
+});
 
 /** A post without its body — enough to render a list item. */
 export type PostMeta = {
