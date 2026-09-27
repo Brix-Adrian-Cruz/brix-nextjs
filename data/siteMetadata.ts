@@ -28,6 +28,7 @@ export const headerNavLinks = [
   { href: "/blog", title: "Playbooks" },
   { href: "/news", title: "News" },
   { href: "/learn", title: "Learn" },
+  { href: "/training", title: "Training" },
   { href: "/tags", title: "Topics" },
   { href: "/about", title: "About" },
 ];
