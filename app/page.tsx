@@ -1,25 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import PostListItem from "@/components/PostListItem";
+import TrainingProgress from "@/components/TrainingProgress";
 import { POSTS_ON_HOME_PAGE, siteMetadata } from "@/data/siteMetadata";
 import { getAllPostsMeta } from "@/lib/posts";
 
-// The site's four real areas — the home page's job is to introduce someone
-// to all of them, not just funnel straight into the blog list below.
+// The rest of the site, besides training (which gets its own section right
+// under the hero — that's the site's main thread, not one tile among four).
+// Playbooks goes last: reference material, not the front door.
 const SITE_SECTIONS = [
-  {
-    href: "/blog",
-    title: "Playbooks",
-    description:
-      "Runbooks for triage, builds, caching, and escalation — read one when you're stuck on a ticket.",
-    icon: (
-      <>
-        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
-        <path d="M9 14l2 2 4-4" />
-        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-      </>
-    ),
-  },
   {
     href: "/learn",
     title: "Learn",
@@ -33,18 +22,6 @@ const SITE_SECTIONS = [
     ),
   },
   {
-    href: "/training",
-    title: "Training",
-    description:
-      "The 30-day Next.js Support Academy — labs, quizzes, and a field guide, day by day.",
-    icon: (
-      <>
-        <path d="M22 10 12 5 2 10l10 5 10-5z" />
-        <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5" />
-      </>
-    ),
-  },
-  {
     href: "/news",
     title: "News",
     description:
@@ -54,6 +31,19 @@ const SITE_SECTIONS = [
         <path d="M4 11a9 9 0 0 1 9 9" />
         <path d="M4 4a16 16 0 0 1 16 16" />
         <circle cx="5" cy="19" r="1" fill="currentColor" stroke="none" />
+      </>
+    ),
+  },
+  {
+    href: "/blog",
+    title: "Playbooks",
+    description:
+      "Runbooks for triage, builds, caching, and escalation — read one when you're stuck on a ticket.",
+    icon: (
+      <>
+        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+        <path d="M9 14l2 2 4-4" />
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
       </>
     ),
   },
@@ -95,15 +85,15 @@ export default async function Home() {
             {siteMetadata.title}
           </h1>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
-            {siteMetadata.intro}
+            {siteMetadata.homeIntro}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/blog/where-to-start-nextjs-problems"
+              href="/training"
               className="group inline-flex items-center gap-2 rounded-md bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 active:scale-[0.98]"
             >
-              Start with triage
+              Start the Academy
               <svg
                 className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                 viewBox="0 0 24 24"
@@ -121,11 +111,13 @@ export default async function Home() {
               href="/blog"
               className="rounded-md border border-slate-500 px-5 py-2.5 text-sm font-semibold text-slate-100 transition-all hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 active:scale-[0.98]"
             >
-              All playbooks
+              Browse playbooks
             </Link>
           </div>
         </div>
       </section>
+
+      <TrainingProgress />
 
       <section className="mb-16">
         <h2 className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
@@ -166,7 +158,7 @@ export default async function Home() {
       <section>
         <div className="mb-6 flex items-baseline justify-between">
           <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-            Latest playbooks
+            Recent playbooks
           </h2>
           {posts.length > POSTS_ON_HOME_PAGE && (
             <Link
@@ -184,8 +176,8 @@ export default async function Home() {
           </p>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
-            {recentPosts.map((post, index) => (
-              <PostListItem key={post.slug} post={post} featured={index === 0} />
+            {recentPosts.map((post) => (
+              <PostListItem key={post.slug} post={post} />
             ))}
           </div>
         )}
