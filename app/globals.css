@@ -32,6 +32,12 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   @apply bg-white text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-200;
 }

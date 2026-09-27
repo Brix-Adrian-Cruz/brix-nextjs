@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { headerNavLinks, siteMetadata } from "@/data/siteMetadata";
+import { Suspense } from "react";
+import { siteMetadata } from "@/data/siteMetadata";
+import NavLinks, { NavLinksFallback } from "./NavLinks";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
@@ -18,15 +20,9 @@ export default function Header() {
         </Link>
 
         <nav className="flex items-center gap-1 sm:gap-2">
-          {headerNavLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded px-2 py-1 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
-            >
-              {link.title}
-            </Link>
-          ))}
+          <Suspense fallback={<NavLinksFallback />}>
+            <NavLinks />
+          </Suspense>
           <ThemeToggle />
         </nav>
       </div>

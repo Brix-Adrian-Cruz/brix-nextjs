@@ -1,4 +1,4 @@
-import Link from "next/link";
+import PrevNextNav from "@/components/PrevNextNav";
 import { allLessons } from "@/data/learnNav";
 
 /** Previous/next links, derived from the order in data/learnNav.ts. */
@@ -10,38 +10,5 @@ export default function LessonNav({ href }: { href: string }) {
       ? allLessons[index + 1]
       : undefined;
 
-  return (
-    <nav className="mt-12 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-2 dark:border-slate-800">
-      <div>
-        {previous && (
-          <>
-            <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
-              Previous
-            </p>
-            <Link
-              href={previous.href}
-              className="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-            >
-              {previous.title}
-            </Link>
-          </>
-        )}
-      </div>
-      <div className="sm:text-right">
-        {next && (
-          <>
-            <p className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
-              Next
-            </p>
-            <Link
-              href={next.href}
-              className="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-            >
-              {next.title}
-            </Link>
-          </>
-        )}
-      </div>
-    </nav>
-  );
+  return <PrevNextNav previous={previous} next={next} />;
 }

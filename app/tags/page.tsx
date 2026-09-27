@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTopicAccent } from "@/components/TopicBadge";
 import { getAllTags } from "@/lib/posts";
 
 export const metadata: Metadata = {
@@ -29,10 +30,10 @@ export default async function TagsPage() {
             <li key={slug}>
               <Link
                 href={`/tags/${slug}`}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-medium hover:border-primary-500 hover:text-primary-600 dark:border-slate-800 dark:hover:border-primary-400 dark:hover:text-primary-400"
+                className={`inline-flex items-center gap-2 rounded-lg border px-4 py-2 font-mono text-sm font-medium uppercase tracking-wide transition-colors hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1 ${getTopicAccent(tag)}`}
               >
                 {tag}
-                <span className="text-slate-500 dark:text-slate-400">
+                <span className="normal-case tracking-normal opacity-70">
                   {count}
                 </span>
               </Link>

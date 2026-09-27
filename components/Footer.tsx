@@ -23,7 +23,7 @@ export default async function Footer() {
               <a
                 key={link.title}
                 href={link.href}
-                className="hover:text-primary-600 dark:hover:text-primary-400"
+                className="transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               >
                 {link.title}
               </a>
@@ -33,7 +33,7 @@ export default async function Footer() {
         <div className="flex gap-2">
           <span>© {new Date().getFullYear()}</span>
           <span aria-hidden="true">·</span>
-          <Link href="/" className="hover:underline">
+          <Link href="/" className="transition-colors hover:text-primary-600 hover:underline dark:hover:text-primary-400">
             {siteMetadata.title}
           </Link>
         </div>

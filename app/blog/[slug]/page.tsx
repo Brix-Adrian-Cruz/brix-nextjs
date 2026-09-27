@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PrevNextNav from "@/components/PrevNextNav";
 import TopicBadge from "@/components/TopicBadge";
 import { siteMetadata } from "@/data/siteMetadata";
 import { formatDate, getAllPostsMeta, getPostBySlug } from "@/lib/posts";
@@ -63,43 +64,16 @@ export default async function PostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
 
-      <nav className="grid gap-4 border-t border-slate-200 pt-8 sm:grid-cols-2 dark:border-slate-800">
-        <div>
-          {older && (
-            <>
-              <p className="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-500">
-                Previous post
-              </p>
-              <Link
-                href={`/blog/${older.slug}`}
-                className="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-              >
-                {older.title}
-              </Link>
-            </>
-          )}
-        </div>
-        <div className="sm:text-right">
-          {newer && (
-            <>
-              <p className="font-mono text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-500">
-                Next post
-              </p>
-              <Link
-                href={`/blog/${newer.slug}`}
-                className="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-              >
-                {newer.title}
-              </Link>
-            </>
-          )}
-        </div>
-      </nav>
+      <PrevNextNav
+        previous={older && { href: `/blog/${older.slug}`, title: older.title }}
+        next={newer && { href: `/blog/${newer.slug}`, title: newer.title }}
+        labels={{ previous: "Previous post", next: "Next post" }}
+      />
 
       <div className="pt-8">
         <Link
           href="/blog"
-          className="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+          className="text-sm font-medium text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-200"
         >
           ← All playbooks
         </Link>

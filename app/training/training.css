@@ -1,7 +1,11 @@
-/* Next.js Support Academy: every rule is scoped under .trn so it never leaks into the rest of brix-nextjs. */
-.trn{--t-bg:#ffffff;--t-bg-light:#f1f3f6;--t-border:#e3e6ec;--t-border-dark:#cdd2db;--t-brand:#3559e6;--t-brand-hover:#2442b8;--t-selected:#eaeefc;--t-text:#11141a;--t-text-2:#5c6470;--t-highlight:#e8eefc;--t-pos:#159a6a;--t-pos-bg:#e8f6ee;--t-neg:#dc4c4c;--t-neg-bg:#fdecec;--t-warn-bg:#fff6e0;--t-on-brand:#ffffff;--t-code:#f6f7f9;
-  background:var(--t-bg);color:var(--t-text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;letter-spacing:-.005em;min-height:100vh}
-@media (prefers-color-scheme:dark){.trn{--t-bg:#0a0b0e;--t-bg-light:#121419;--t-border:#23262e;--t-border-dark:#343844;--t-brand:#6a92ff;--t-brand-hover:#88a8ff;--t-selected:#1a2030;--t-text:#eef0f4;--t-text-2:#9aa0ad;--t-highlight:#14213d;--t-pos:#46d39a;--t-pos-bg:#0e2a1d;--t-neg:#ff6b6b;--t-neg-bg:#2a1212;--t-warn-bg:#2a2210;--t-on-brand:#0a0b0e;--t-code:#121419}}
+/* Next.js Support Academy: every rule is scoped under .trn so it never leaks into
+   the rest of brix-nextjs. Colors and fonts are pulled from the site's own
+   Tailwind theme tokens (app/globals.css `@theme`) instead of a second,
+   hand-rolled palette, so this section stays on-brand and respects the site's
+   `.dark` class toggle rather than the OS `prefers-color-scheme`. */
+.trn{--t-bg:var(--color-white);--t-bg-light:var(--color-slate-100);--t-border:var(--color-slate-200);--t-border-dark:var(--color-slate-300);--t-brand:var(--color-primary-600);--t-brand-hover:var(--color-primary-700);--t-selected:var(--color-primary-50);--t-text:var(--color-slate-800);--t-text-2:var(--color-slate-500);--t-highlight:var(--color-primary-100);--t-pos:var(--color-status-ok, oklch(0.62 0.15 150));--t-pos-bg:color-mix(in oklch, var(--color-status-ok, oklch(0.62 0.15 150)) 15%, var(--color-white));--t-neg:var(--color-status-fail, oklch(0.6 0.2 25));--t-neg-bg:color-mix(in oklch, var(--color-status-fail, oklch(0.6 0.2 25)) 12%, var(--color-white));--t-warn-bg:color-mix(in oklch, var(--color-status-warn, oklch(0.72 0.15 75)) 18%, var(--color-white));--t-on-brand:var(--color-white);--t-code:var(--color-slate-50);
+  background:var(--t-bg);color:var(--t-text);font-family:var(--font-sans),-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;letter-spacing:-.005em;min-height:100vh}
+.dark .trn{--t-bg:var(--color-slate-950);--t-bg-light:var(--color-slate-900);--t-border:var(--color-slate-800);--t-border-dark:var(--color-slate-700);--t-brand:var(--color-primary-400);--t-brand-hover:var(--color-primary-200);--t-selected:var(--color-primary-950);--t-text:var(--color-slate-200);--t-text-2:var(--color-slate-400);--t-highlight:var(--color-primary-950);--t-pos:var(--color-status-ok, oklch(0.62 0.15 150));--t-pos-bg:color-mix(in oklch, var(--color-status-ok, oklch(0.62 0.15 150)) 20%, var(--color-slate-950));--t-neg:var(--color-status-fail, oklch(0.6 0.2 25));--t-neg-bg:color-mix(in oklch, var(--color-status-fail, oklch(0.6 0.2 25)) 18%, var(--color-slate-950));--t-warn-bg:color-mix(in oklch, var(--color-status-warn, oklch(0.72 0.15 75)) 20%, var(--color-slate-950));--t-on-brand:var(--color-slate-950);--t-code:var(--color-slate-900)}
 .trn *{box-sizing:border-box}
 .trn a{color:var(--t-brand);text-decoration:underline;text-underline-offset:2px}
 .trn a:hover{color:var(--t-brand-hover)}
@@ -11,12 +15,12 @@
 .trn li{margin:4px 0}
 .trn b,.trn strong{font-weight:600}
 .trn h1,.trn h2,.trn h3,.trn h4{color:var(--t-text);margin:0}
-.trn code,.trn pre,.trn .trn-mono{font-family:"SF Mono","IBM Plex Mono","Cascadia Code",Consolas,monospace}
+.trn code,.trn pre,.trn .trn-mono{font-family:var(--font-mono),var(--font-mono),"SF Mono",Consolas,monospace}
 .trn code{font-size:.88em;background:var(--t-bg-light);padding:1px 5px;border-radius:4px}
 .trn pre{background:var(--t-code);border:1px solid var(--t-border);border-radius:6px;padding:14px 16px;overflow:auto;font-size:13px;line-height:1.55;margin:12px 0}
 .trn pre code{background:none;padding:0;font-size:inherit}
 .trn table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
-.trn th{font:500 11px/1.3 "SF Mono",Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--t-text-2);text-align:left;padding:8px 10px;border-bottom:1px solid var(--t-border-dark);white-space:nowrap}
+.trn th{font:500 11px/1.3 var(--font-mono),"SF Mono",Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--t-text-2);text-align:left;padding:8px 10px;border-bottom:1px solid var(--t-border-dark);white-space:nowrap}
 .trn td{padding:9px 10px;border-bottom:1px solid var(--t-border);vertical-align:top}
 .trn details{border:1px solid var(--t-border);border-radius:6px;padding:10px 14px;margin:8px 0}
 .trn details[open]{background:var(--t-bg-light)}
@@ -25,7 +29,7 @@
 
 .trn-wrap{max-width:1180px;margin:0 auto;padding:32px 24px 64px}
 .trn-banner{background:var(--t-highlight);text-align:center;padding:8px 16px;font-size:14px}
-.trn-eyebrow{font:500 12px/1.4 "SF Mono",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--t-text-2)}
+.trn-eyebrow{font:500 12px/1.4 var(--font-mono),"SF Mono",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--t-text-2)}
 .trn-muted{color:var(--t-text-2)}
 .trn-small{font-size:13px}.trn-xs{font-size:12px}
 .trn-hero{padding-bottom:8px}
@@ -43,7 +47,7 @@
 .trn-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:10px}
 .trn-wk .wl{font-size:11px;color:var(--t-text-2);margin-bottom:6px;line-height:1.3}
 .trn-wk .cells{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
-.trn a.trn-cell{display:block;height:28px;border-radius:4px;border:1px solid var(--t-border-dark);background:var(--t-bg);color:var(--t-text-2);font:500 11px/26px "SF Mono",Consolas,monospace;text-align:center;text-decoration:none}
+.trn a.trn-cell{display:block;height:28px;border-radius:4px;border:1px solid var(--t-border-dark);background:var(--t-bg);color:var(--t-text-2);font:500 11px/26px var(--font-mono),"SF Mono",Consolas,monospace;text-align:center;text-decoration:none}
 .trn a.trn-cell.prog{background:var(--t-selected);border-color:var(--t-brand);color:var(--t-text)}
 .trn a.trn-cell.done{background:var(--t-pos);border-color:var(--t-pos);color:var(--t-on-brand)}
 .trn-savepanel{margin-top:12px}
@@ -76,7 +80,7 @@
 .trn-day h2{font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:400;line-height:1.1;letter-spacing:-.02em;margin:6px 0 10px}
 .trn-goal{font-size:17px;color:var(--t-text-2)}
 .trn-plan{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 28px}
-.trn-plan span{font:12px/1 "SF Mono",Consolas,monospace;padding:6px 10px;border:1px solid var(--t-border);border-radius:4px;color:var(--t-text-2)}
+.trn-plan span{font:12px/1 var(--font-mono),"SF Mono",Consolas,monospace;padding:6px 10px;border:1px solid var(--t-border);border-radius:4px;color:var(--t-text-2)}
 .trn-plan b{color:var(--t-text);font-weight:500}
 .trn-blk{padding:24px 0;border-top:1px solid var(--t-border)}
 .trn-blk>h3{font-size:1.15rem;font-weight:500;margin:0 0 14px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
@@ -111,13 +115,13 @@
 
 .trn-tablewrap{overflow-x:auto}
 .trn-table td ul{margin:0;padding-left:18px}
-.trn-pill{font:11px/1 "SF Mono",Consolas,monospace;padding:4px 7px;border-radius:4px;border:1px solid var(--t-border-dark);white-space:nowrap}
+.trn-pill{font:11px/1 var(--font-mono),"SF Mono",Consolas,monospace;padding:4px 7px;border-radius:4px;border:1px solid var(--t-border-dark);white-space:nowrap}
 .trn-fgwrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 36px}
 .trn-fgwrap h3{font-size:1.05rem;font-weight:500;margin:0 0 8px}
 .trn .flowline{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-.trn .flowline span{font:12px/1 "SF Mono",Consolas,monospace;padding:6px 8px;border:1px solid var(--t-border-dark);border-radius:4px}
+.trn .flowline span{font:12px/1 var(--font-mono),"SF Mono",Consolas,monospace;padding:6px 8px;border:1px solid var(--t-border-dark);border-radius:4px}
 .trn .ok{color:var(--t-pos)}
-.trn .bad{color:var(--t-neg);font:12px "SF Mono",Consolas,monospace}
+.trn .bad{color:var(--t-neg);font:12px var(--font-mono),"SF Mono",Consolas,monospace}
 .trn .muted{color:var(--t-text-2);font-size:14px}
 
 @media (max-width:900px){

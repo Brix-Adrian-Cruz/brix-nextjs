@@ -19,7 +19,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle dark mode"
-      className="rounded-md p-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+      className="rounded-md p-2 text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1 active:scale-95 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
     >
       {/* Sun — shown in dark mode, since clicking it returns you to light. */}
       <svg

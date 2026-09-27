@@ -26,7 +26,7 @@ export default async function Home() {
         <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/95 via-slate-950/85 to-primary-950/70" />
 
         <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-10">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary-300">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary-200">
             {siteMetadata.tagline}
           </p>
           <h1 className="mt-3 max-w-2xl text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
@@ -39,13 +39,13 @@ export default async function Home() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/blog/where-to-start-nextjs-problems"
-              className="rounded-md bg-primary-500 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-400"
+              className="rounded-md bg-primary-500 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 active:scale-[0.98]"
             >
               Start with triage
             </Link>
             <Link
               href="/blog"
-              className="rounded-md border border-slate-500 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-white/10"
+              className="rounded-md border border-slate-500 px-4 py-2 text-sm font-semibold text-slate-100 transition-all hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 active:scale-[0.98]"
             >
               All playbooks
             </Link>
@@ -61,7 +61,7 @@ export default async function Home() {
           {posts.length > POSTS_ON_HOME_PAGE && (
             <Link
               href="/blog"
-              className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-400"
+              className="text-sm font-medium text-primary-600 transition-colors hover:underline dark:text-primary-400"
             >
               View all
             </Link>

@@ -31,8 +31,8 @@ export default async function TagPage({ params }: Props) {
     tag;
 
   return (
-    <div className="divide-y divide-slate-200 dark:divide-slate-800">
-      <header className="space-y-2 pb-8 pt-6">
+    <div className="py-6">
+      <header className="mb-8 space-y-2 border-b border-slate-200 pb-6 dark:border-slate-800">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
           {displayName}
         </h1>
@@ -40,16 +40,18 @@ export default async function TagPage({ params }: Props) {
           {posts.length} {posts.length === 1 ? "post" : "posts"} ·{" "}
           <Link
             href="/tags"
-            className="text-primary-600 hover:underline dark:text-primary-400"
+            className="text-primary-600 transition-colors hover:underline dark:text-primary-400"
           >
             all tags
           </Link>
         </p>
       </header>
 
-      {posts.map((post) => (
-        <PostListItem key={post.slug} post={post} />
-      ))}
+      <div className="grid gap-4 sm:grid-cols-2">
+        {posts.map((post) => (
+          <PostListItem key={post.slug} post={post} />
+        ))}
+      </div>
     </div>
   );
 }

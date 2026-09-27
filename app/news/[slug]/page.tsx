@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { DEFAULT_ACCENT } from "@/components/TopicBadge";
 import {
   formatWpDate,
   getWpPost,
@@ -52,11 +53,11 @@ async function PostBody({ params }: Props) {
     <>
       <header className="space-y-3 border-b border-slate-200 pb-6 dark:border-slate-800">
         {post.categories.length > 0 && (
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             {post.categories.map((category) => (
               <span
                 key={category.slug}
-                className="text-xs font-medium uppercase tracking-wide text-primary-600 dark:text-primary-400"
+                className={`inline-block rounded border px-2 py-0.5 font-mono text-xs uppercase tracking-wider ${DEFAULT_ACCENT}`}
               >
                 {category.name}
               </span>
@@ -107,7 +108,7 @@ export default function NewsPostPage({ params }: Props) {
 
       <Link
         href="/news"
-        className="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+        className="text-sm font-medium text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-200"
       >
         ← Back to news
       </Link>

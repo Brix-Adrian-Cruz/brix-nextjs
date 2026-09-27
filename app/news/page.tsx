@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DEFAULT_ACCENT } from "@/components/TopicBadge";
 import SetupNotice from "@/components/wordpress/SetupNotice";
 import {
   formatWpDate,
@@ -56,9 +57,12 @@ export default async function NewsPage() {
 
       <div className="divide-y divide-slate-200 dark:divide-slate-800">
         {posts.map((post) => (
-          <article key={post.slug} className="py-8">
+          <article
+            key={post.slug}
+            className="-mx-4 rounded-lg px-4 py-8 transition-colors hover:bg-slate-50 sm:-mx-6 sm:px-6 dark:hover:bg-slate-900/40"
+          >
             <div className="grid gap-4 md:grid-cols-4">
-              <p className="text-sm text-slate-500 md:col-span-1 dark:text-slate-400">
+              <p className="font-mono text-xs text-slate-500 md:col-span-1 dark:text-slate-500">
                 <time dateTime={post.date}>{formatWpDate(post.date)}</time>
               </p>
 
@@ -66,18 +70,18 @@ export default async function NewsPage() {
                 <h2 className="text-2xl font-bold tracking-tight">
                   <Link
                     href={`/news/${post.slug}`}
-                    className="hover:text-primary-600 dark:hover:text-primary-400"
+                    className="transition-colors hover:text-primary-600 dark:hover:text-primary-400"
                   >
                     {post.title}
                   </Link>
                 </h2>
 
                 {post.categories.length > 0 && (
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2">
                     {post.categories.map((category) => (
                       <span
                         key={category.slug}
-                        className="text-xs font-medium uppercase tracking-wide text-primary-600 dark:text-primary-400"
+                        className={`inline-block rounded border px-2 py-0.5 font-mono text-xs uppercase tracking-wider ${DEFAULT_ACCENT}`}
                       >
                         {category.name}
                       </span>
@@ -91,7 +95,7 @@ export default async function NewsPage() {
                   </p>
                 )}
 
-                <p className="text-sm text-slate-500 dark:text-slate-400">
+                <p className="font-mono text-xs text-slate-500 dark:text-slate-500">
                   By {post.author}
                 </p>
               </div>

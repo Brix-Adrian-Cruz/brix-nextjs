@@ -60,7 +60,7 @@ export default function AboutPage() {
             sizes="(min-width: 1280px) 304px, (min-width: 768px) 224px, 100vw"
             className="rounded-lg border border-slate-200 object-cover dark:border-slate-800"
           />
-          <p className="mt-2 font-mono text-[11px] text-slate-500 dark:text-slate-500">
+          <p className="mt-2 font-mono text-xs text-slate-500 dark:text-slate-500">
             Image: Pixabay
           </p>
         </aside>
