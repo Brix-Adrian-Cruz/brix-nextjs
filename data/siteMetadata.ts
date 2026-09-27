@@ -7,7 +7,7 @@ export const siteMetadata = {
   // Shown as the byline on posts. Kept as a team rather than a person, since
   // these are operational runbooks rather than personal writing.
   author: "Support Engineering",
-  headerTitle: "Next.js Playbooks",
+  headerTitle: "NextJS Support",
   description:
     "Runbooks for handling Next.js sites on Pantheon: triage, logs, build failures, caching, and escalation.",
   language: "en-us",
