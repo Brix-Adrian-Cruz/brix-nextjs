@@ -1,36 +1,41 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import DayControls from "../../_components/DayControls";
-import DaySidebar from "../../_components/DaySidebar";
-import LabChecklist from "../../_components/LabChecklist";
-import Notes from "../../_components/Notes";
-import Quiz from "../../_components/Quiz";
-import { DAYS, getDay } from "../../_data/course";
-import { WEEKS } from "../../_data/outline";
+import DayControls from "../../../_components/DayControls";
+import DaySidebar from "../../../_components/DaySidebar";
+import LabChecklist from "../../../_components/LabChecklist";
+import Notes from "../../../_components/Notes";
+import Quiz from "../../../_components/Quiz";
+import { COURSES, getCourse } from "../../../_data/courses";
+import { getCourseContent } from "../../../_data/content";
 import { highlightRawHtml } from "@/lib/highlightCode";
 
-// Pre-render all 30 days at build time (SSG). Any other day number calls notFound() → 404 by design.
+// Pre-render every day of every course at build time (SSG). Any other course or day calls notFound() → 404 by design.
 // Note: brix-nextjs has Cache Components enabled, which rejects `dynamicParams`, so the
 // 404 comes from the notFound() check below instead.
 // Lab: compare with Pages Router getStaticPaths + fallback: false (Days 7, 8, 25).
 
 export function generateStaticParams() {
-  return DAYS.map((d) => ({ day: String(d.id) }));
+  return COURSES.flatMap((c) => c.outline.map((d) => ({ course: c.id, day: String(d.id) })));
 }
 
-type Props = { params: Promise<{ day: string }> };
+type Props = { params: Promise<{ course: string; day: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { day } = await params;
-  const d = getDay(Number(day));
+  const { course, day } = await params;
+  const content = await getCourseContent(course);
+  const d = content?.days.find((x) => x.id === Number(day));
   return { title: d ? `Day ${d.id}: ${d.title}` : "Not found" };
 }
 
 export default async function DayPage({ params }: Props) {
-  const { day } = await params;
-  const d = getDay(Number(day));
+  const { course: courseId, day } = await params;
+  const course = getCourse(courseId);
+  const content = await getCourseContent(courseId);
+  if (!course || !content) notFound();
+  const DAYS = content.days;
+  const d = DAYS.find((x) => x.id === Number(day));
   if (!d) notFound();
-  const w = WEEKS[d.week - 1];
+  const w = course.weeks[d.week - 1];
   const [learnHtml, knowhowHtml] = await Promise.all([
     highlightRawHtml(d.learn),
     highlightRawHtml(d.knowhow),

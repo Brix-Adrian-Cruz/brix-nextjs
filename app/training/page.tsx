@@ -1,21 +1,25 @@
-import WeekOverview from "./_components/WeekOverview";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { COURSES } from "./_data/courses";
 
-export default function TrainingHome() {
+export const metadata: Metadata = { title: "All courses" };
+
+export default function TrainingPicker() {
   return (
     <main>
-      <section className="trn-intro">
-        <p>
-          {"This course covers JavaScript basics through expert triage, including how Next.js runs on Pantheon and Front-End Sites (FES) and migration. "}
-          {"The labs use two real sites: "}
-          <b>{"brix-nextjs"}</b>
-          {" (this Next.js site) and "}
-          <b>{"brix-nextjs-cms"}</b>
-          {" (its WordPress back end). The course code is part of the lab, too: see "}
-          <code>{"app/training/"}</code>
-          {"."}
-        </p>
+      <header className="trn-hero">
+        <div className="trn-eyebrow">{"Pantheon CSE · Support training"}</div>
+        <h1>{"Support Academy"}</h1>
+      </header>
+      <section className="trn-courses" aria-label="Courses">
+        {COURSES.map((c) => (
+          <Link key={c.id} href={`/training/${c.id}`} className="trn-course">
+            <span className="trn-eyebrow">{`${c.outline.length} days · ${c.weeks.length} weeks`}</span>
+            <h3>{c.title}</h3>
+            <p className="trn-muted">{c.description}</p>
+          </Link>
+        ))}
       </section>
-      <WeekOverview />
     </main>
   );
 }

@@ -2,26 +2,27 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { OUTLINE, WEEKS } from "../_data/outline";
+import { useCourse } from "./CourseContext";
 import { dayStatus, decodeProgress, encodeProgress, stats, useProgress } from "../_lib/progress";
 
 export default function ProgressHeader() {
+  const { base, weeks, outline } = useCourse();
   const { p, loaded, storageOk, replace, reset } = useProgress();
   const [open, setOpen] = useState(false);
   const [code, setCode] = useState("");
   const [msg, setMsg] = useState("");
   const [armReset, setArmReset] = useState(false);
-  const s = stats(p);
-  const next = OUTLINE.find((d) => !p.done[String(d.id)]) ?? OUTLINE[OUTLINE.length - 1];
+  const s = stats(p, outline);
+  const next = outline.find((d) => !p.done[String(d.id)]) ?? outline[outline.length - 1];
 
   return (
     <section className="trn-progress" aria-label="Course progress">
       <div className="trn-stats">
         <div className="trn-stat"><div className="v">{loaded ? `${s.pct}%` : "—"}</div><div className="l">Course complete</div></div>
-        <div className="trn-stat"><div className="v">{loaded ? `${s.done}/${OUTLINE.length}` : "—"}</div><div className="l">Days done</div></div>
+        <div className="trn-stat"><div className="v">{loaded ? `${s.done}/${outline.length}` : "—"}</div><div className="l">Days done</div></div>
         <div className="trn-stat"><div className="v">{loaded && s.quizPct !== null ? `${s.quizPct}%` : "—"}</div><div className="l">Quiz accuracy</div></div>
         <div className="trn-actions">
-          <Link className="trn-btn primary" href={`/training/day/${next.id}`}>{"Resume: Day "}{next.id}</Link>
+          <Link className="trn-btn primary" href={`${base}/day/${next.id}`}>{"Resume: Day "}{next.id}</Link>
           <button type="button" className="trn-btn" onClick={() => { setOpen(!open); setCode(encodeProgress(p)); setMsg(""); }}>
             {"Backup / restore"}
           </button>
@@ -29,14 +30,14 @@ export default function ProgressHeader() {
       </div>
 
       <div className="trn-strip">
-        {WEEKS.map((w) => (
+        {weeks.map((w) => (
           <div className="trn-wk" key={w.n}>
             <div className="wl"><b>{"Week "}{w.n}</b>{" · "}{w.title}</div>
             <div className="cells">
-              {OUTLINE.filter((d) => d.week === w.n).map((d) => {
+              {outline.filter((d) => d.week === w.n).map((d) => {
                 const st = loaded ? dayStatus(p, d.id) : "none";
                 return (
-                  <Link key={d.id} href={`/training/day/${d.id}`} className={`trn-cell ${st}`} title={`Day ${d.id}: ${d.title}`}>
+                  <Link key={d.id} href={`${base}/day/${d.id}`} className={`trn-cell ${st}`} title={`Day ${d.id}: ${d.title}`}>
                     {d.id}
                   </Link>
                 );

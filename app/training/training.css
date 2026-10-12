@@ -135,3 +135,8 @@
   .trn-progress,.trn-side,.trn-footer-nav,.trn-views,.trn-notes{display:none!important}
   .trn-layout{grid-template-columns:1fr}
 }
+.trn-courses{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:24px 0}
+.trn-course{display:block;border:1px solid var(--t-border);border-radius:8px;padding:20px;text-decoration:none!important;background:var(--t-bg)}
+.trn-course:hover{border-color:var(--t-brand);background:var(--t-bg-light)}
+.trn-course h3{margin:6px 0 8px;font-size:20px}
+.trn-course p{margin:0}

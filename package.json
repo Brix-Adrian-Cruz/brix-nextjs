@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "node scripts/serve-standalone.mjs",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test scripts/tests/*.test.mjs"
   },
   "dependencies": {
     "@pantheon-systems/nextjs-cache-handler": "^0.4.0",

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { OUTLINE, TOTAL_DAYS } from "@/app/training/_data/outline";
+import { OUTLINE, TOTAL_DAYS } from "@/app/training/_data/nextjs/outline";
 import { stats, useProgress } from "@/app/training/_lib/progress";
 
 /**
@@ -13,8 +13,8 @@ import { stats, useProgress } from "@/app/training/_lib/progress";
  * there's no hydration mismatch.
  */
 export default function TrainingProgress() {
-  const { p, loaded } = useProgress();
-  const { done, pct } = stats(p);
+  const { p, loaded } = useProgress("nextjs");
+  const { done, pct } = stats(p, OUTLINE);
   const nextDay = OUTLINE.find((d) => !p.done[String(d.id)]) ?? OUTLINE[OUTLINE.length - 1];
   const started = loaded && done > 0;
 
@@ -35,7 +35,7 @@ export default function TrainingProgress() {
           </p>
 
           <Link
-            href={`/training/day/${nextDay.id}`}
+            href={`/training/nextjs/day/${nextDay.id}`}
             className="mt-5 inline-flex items-center gap-2 rounded-md bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 active:scale-[0.98]"
           >
             {started ? "Resume training" : "Start Day 1"}
@@ -68,7 +68,7 @@ export default function TrainingProgress() {
             />
           </div>
           <Link
-            href="/training"
+            href="/training/nextjs"
             className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary-600 transition-colors hover:underline dark:text-primary-400"
           >
             View full syllabus

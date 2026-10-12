@@ -1,6 +1,6 @@
 // Lightweight course outline that is safe to import into Client Components.
-export type Week = { n: number; title: string; sub: string };
-export type OutlineDay = { id: number; week: number; mins: number; title: string; labs: number; answers: number[] };
+import type { Week, OutlineDay } from "../types";
+export type { Week, OutlineDay };
 
 export const WEEKS: Week[] = [
  {

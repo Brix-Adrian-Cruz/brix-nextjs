@@ -1,18 +1,30 @@
 import type { Metadata } from "next";
-import { REPORTS } from "../_data/course";
+import { notFound } from "next/navigation";
+import { COURSES, getCourse } from "../../_data/courses";
+import { getCourseContent } from "../../_data/content";
 
 export const metadata: Metadata = { title: "Common reports" };
 
-export default function ReportsPage() {
+export function generateStaticParams() {
+  return COURSES.map((c) => ({ course: c.id }));
+}
+
+export default async function ReportsPage({ params }: { params: Promise<{ course: string }> }) {
+  const { course: id } = await params;
+  const course = getCourse(id);
+  const content = await getCourseContent(id);
+  if (!course || !content) notFound();
+  const REPORTS = content.reports;
+  const head = course.reportsHeading;
   return (
     <main>
       <p className="trn-muted">
-        {"These are the recurring Next.js reports in Zendesk (2026). Each row has the first checks, the playbook to follow, and real tickets to read. Work each one using the Day 21 triage framework."}
+        {course.reportsIntro}
       </p>
       <div className="trn-tablewrap">
         <table className="trn-table">
           <thead>
-            <tr><th>{"Customer says…"}</th><th>{"Layer"}</th><th>{"First checks"}</th><th>{"Playbook"}</th><th>{"Real tickets"}</th></tr>
+            <tr>{head.map((h) => <th key={h}>{h}</th>)}</tr>
           </thead>
           <tbody>
             {REPORTS.map((r) => (

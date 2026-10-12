@@ -38,6 +38,15 @@ const nextConfig: NextConfig = {
 
   // Disable in-memory caching to use custom handler
   cacheMaxMemorySize: 0,
+
+  // The Next.js course moved under /training/nextjs when SOC training was added.
+  async redirects() {
+    return [
+      { source: "/training/day/:day", destination: "/training/nextjs/day/:day", permanent: true },
+      { source: "/training/reports", destination: "/training/nextjs/reports", permanent: true },
+      { source: "/training/field-guide", destination: "/training/nextjs/field-guide", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

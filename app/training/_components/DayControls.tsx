@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { TOTAL_DAYS } from "../_data/outline";
+import { useCourse } from "./CourseContext";
 import { useProgress } from "../_lib/progress";
 
 export default function DayControls({ dayId }: { dayId: number }) {
+  const { base, totalDays } = useCourse();
   const { p, update } = useProgress();
   const k = String(dayId);
   const done = !!p.done[k];
@@ -17,11 +18,11 @@ export default function DayControls({ dayId }: { dayId: number }) {
     });
   return (
     <div className="trn-footer-nav">
-      {dayId > 1 ? <Link className="trn-btn" href={`/training/day/${dayId - 1}`}>{`← Day ${dayId - 1}`}</Link> : <span />}
+      {dayId > 1 ? <Link className="trn-btn" href={`${base}/day/${dayId - 1}`}>{`← Day ${dayId - 1}`}</Link> : <span />}
       <button type="button" className={`trn-btn ${done ? "good" : "primary"}`} onClick={toggle}>
         {done ? `✓ Completed ${p.done[k]} · undo` : `Mark Day ${dayId} complete`}
       </button>
-      {dayId < TOTAL_DAYS ? <Link className="trn-btn" href={`/training/day/${dayId + 1}`}>{`Day ${dayId + 1} →`}</Link> : <span />}
+      {dayId < totalDays ? <Link className="trn-btn" href={`${base}/day/${dayId + 1}`}>{`Day ${dayId + 1} →`}</Link> : <span />}
     </div>
   );
 }

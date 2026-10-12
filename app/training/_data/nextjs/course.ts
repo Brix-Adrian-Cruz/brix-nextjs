@@ -1,13 +1,7 @@
 // Full lesson content. Imported ONLY by Server Components so it never ships to the browser.
 // Generated file: edit the source course, not this file.
-export type QuizItem = { q: string; o: string[]; a: number; w: string };
-export type Ref = { t: string; u: string };
-export type Day = {
-  id: number; week: number; mins: number; title: string; goal: string;
-  plan: [string, number][]; learn: string; lab: string[]; knowhow: string;
-  quiz: QuizItem[]; refs: Ref[];
-};
-export type Report = { s: string; layer: string; checks: string[]; pb: Ref; tk: Ref[] };
+import type { QuizItem, Ref, Day, Report } from "../types";
+export type { QuizItem, Ref, Day, Report };
 
 export const DAYS: Day[] = [
  {
