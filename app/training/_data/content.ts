@@ -7,6 +7,10 @@ export async function getCourseContent(id: string): Promise<CourseContent | unde
       const [c, f] = await Promise.all([import("./nextjs/course"), import("./nextjs/fieldGuide")]);
       return { days: c.DAYS, reports: c.REPORTS, fieldGuideHtml: f.FIELD_GUIDE_HTML };
     }
+    case "soc": {
+      const [c, f] = await Promise.all([import("./soc/course"), import("./soc/fieldGuide")]);
+      return { days: c.DAYS, reports: c.REPORTS, fieldGuideHtml: f.FIELD_GUIDE_HTML };
+    }
     default:
       return undefined;
   }
