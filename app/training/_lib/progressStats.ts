@@ -22,7 +22,8 @@ export function dayStatus(p: Progress, id: number): DayStatus {
 }
 
 export function stats(p: Progress, outline: OutlineLike[]) {
-  const done = Object.keys(p.done).length;
+  // Count only days that exist in this course so a stray or foreign backup cannot push past 100%.
+  const done = outline.filter((d) => p.done[String(d.id)]).length;
   let right = 0;
   let total = 0;
   for (const d of outline) {
@@ -35,8 +36,9 @@ export function stats(p: Progress, outline: OutlineLike[]) {
   return { done, pct: Math.round((done / outline.length) * 100), quizPct: total ? Math.round((right / total) * 100) : null };
 }
 
-export function encodeProgress(p: Progress): string {
-  return btoa(unescape(encodeURIComponent(JSON.stringify(p))));
+// The course id travels with the code so a backup from one course cannot be restored into another.
+export function encodeProgress(p: Progress, courseId?: string): string {
+  return btoa(unescape(encodeURIComponent(JSON.stringify(courseId ? { ...p, course: courseId } : p))));
 }
 
 const isPlainObject = (v: unknown): v is Record<string, unknown> =>
@@ -44,10 +46,13 @@ const isPlainObject = (v: unknown): v is Record<string, unknown> =>
 
 // Keeps only the known keys whose values are plain objects, so a code from another
 // course (or garbage) can never put the store into a shape that crashes the UI.
-export function decodeProgress(code: string): Partial<Progress> {
+export function decodeProgress(code: string, courseId?: string): Partial<Progress> {
   const raw: unknown = JSON.parse(decodeURIComponent(escape(atob(code.trim()))));
   const out: Partial<Progress> = {};
   if (!isPlainObject(raw)) return out;
+  if (courseId && typeof raw.course === "string" && raw.course !== courseId) {
+    throw new Error(`This backup is for the "${raw.course}" course`);
+  }
   for (const key of ["done", "lab", "quiz", "notes"] as const) {
     if (isPlainObject(raw[key])) (out as Record<string, unknown>)[key] = raw[key];
   }

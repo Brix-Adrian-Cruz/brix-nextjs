@@ -1,8 +1,7 @@
 "use client";
 
+import type { QuizItem } from "../_data/types";
 import { useProgress } from "../_lib/progress";
-
-type QuizItem = { q: string; o: string[]; a: number; w: string };
 
 export default function Quiz({ dayId, quiz }: { dayId: number; quiz: QuizItem[] }) {
   const { p, update } = useProgress();

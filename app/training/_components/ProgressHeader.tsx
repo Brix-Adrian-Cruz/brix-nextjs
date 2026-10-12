@@ -6,7 +6,7 @@ import { useCourse } from "./CourseContext";
 import { dayStatus, decodeProgress, encodeProgress, stats, useProgress } from "../_lib/progress";
 
 export default function ProgressHeader() {
-  const { base, weeks, outline } = useCourse();
+  const { id, base, weeks, outline } = useCourse();
   const { p, loaded, storageOk, replace, reset } = useProgress();
   const [open, setOpen] = useState(false);
   const [code, setCode] = useState("");
@@ -23,7 +23,7 @@ export default function ProgressHeader() {
         <div className="trn-stat"><div className="v">{loaded && s.quizPct !== null ? `${s.quizPct}%` : "—"}</div><div className="l">Quiz accuracy</div></div>
         <div className="trn-actions">
           <Link className="trn-btn primary" href={`${base}/day/${next.id}`}>{"Resume: Day "}{next.id}</Link>
-          <button type="button" className="trn-btn" onClick={() => { setOpen(!open); setCode(encodeProgress(p)); setMsg(""); }}>
+          <button type="button" className="trn-btn" onClick={() => { setOpen(!open); setCode(encodeProgress(p, id)); setMsg(""); }}>
             {"Backup / restore"}
           </button>
         </div>
@@ -58,7 +58,7 @@ export default function ProgressHeader() {
           <textarea value={code} onChange={(e) => setCode(e.target.value)} spellCheck={false} aria-label="Progress code" />
           <div className="trn-row">
             <button type="button" className="trn-btn" onClick={() => { void navigator.clipboard?.writeText(code); setMsg("Copied."); }}>{"Copy code"}</button>
-            <button type="button" className="trn-btn primary" onClick={() => { try { replace(decodeProgress(code)); setMsg("Restored."); } catch { setMsg("That code is not valid."); } }}>{"Restore from code"}</button>
+            <button type="button" className="trn-btn primary" onClick={() => { try { replace(decodeProgress(code, id)); setMsg("Restored."); } catch (e) { setMsg(e instanceof Error && e.message.startsWith("This backup") ? e.message : "That code is not valid."); } }}>{"Restore from code"}</button>
             <button type="button" className="trn-btn" onClick={() => { if (!armReset) { setArmReset(true); setMsg("Click reset again to confirm."); return; } reset(); setArmReset(false); setMsg("Progress reset."); }}>{"Reset all progress"}</button>
             <span className="trn-muted trn-small">{msg}</span>
           </div>

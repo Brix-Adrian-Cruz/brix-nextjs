@@ -24,3 +24,17 @@ test("encode/decode roundtrip and garbage-safe decode", () => {
   assert.deepEqual(decodeProgress(btoa(JSON.stringify({ done: 5, lab: [], other: 1 }))), {});
   assert.deepEqual(decodeProgress(btoa(JSON.stringify([1, 2]))), {});
 });
+
+test("backup codes are tied to their course", () => {
+  const p = { ...blankProgress(), done: { "1": "2026-10-13" } };
+  const code = encodeProgress(p, "nextjs");
+  assert.deepEqual(decodeProgress(code, "nextjs").done, { "1": "2026-10-13" });
+  assert.throws(() => decodeProgress(code, "soc"), /nextjs/);
+  // Old backups (no course id) still restore anywhere.
+  assert.deepEqual(decodeProgress(encodeProgress(p), "soc").done, { "1": "2026-10-13" });
+});
+
+test("stats ignores done days outside the outline", () => {
+  const done = Object.fromEntries(Array.from({ length: 30 }, (_, i) => [String(i + 1), "d"]));
+  assert.equal(stats({ ...blankProgress(), done }, outline).pct, 100);
+});
