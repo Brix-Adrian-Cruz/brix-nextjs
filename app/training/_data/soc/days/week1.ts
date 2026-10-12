@@ -111,7 +111,7 @@ export const WEEK_1_DAYS: Day[] = [
 <p><b>Field practice, not official policy.</b> The Resolve macro used on confirmed phishing adds a no-ratings tag so no survey goes out. If the report turns out to be a false positive, add the no-ratings tag by hand so the survey is not sent. Note that the playbook spells the tag <code>no_ratings</code> while Slack discussion writes it with a hyphen. Check the exact spelling in Zendesk before relying on either, and confirm in #cse-soc.</p>
 <p>The playbook tag list dates from 2023 and tags can change. If a tag in the Zendesk tag box does not match this table, confirm in #cse-soc.</p>`,
     lab: [
-      `In Zendesk (read-only), open any closed abuse ticket and list every tag on it. Match each tag to the table. Mark any you cannot match.`,
+      `In Zendesk (read-only), open a closed abuse ticket and list every tag on it. Match each tag to the table. Mark any you cannot match. Look at the structure only; do not copy customer details into your notes.`,
       `Open the Internal Ticket &amp; Tags page (link in refs) and compare it with the table in the lesson. Note anything that has changed.`,
       `Simulated case 1:<blockquote>You find, with no complainant, that bank-verify.example.test is a copy of a bank login page running from a sandbox Dev environment. You disable it with the mass tool.<br>Which ticket do you create, what do you put in the subject and tags, and in what status do you submit it?</blockquote>`,
       `Simulated case 2:<blockquote>A security engineer sends you a ticket for a paid site, promo-shop.example.test, where malicious code was found. You open a ticket to the site owner.<br>Which tag family applies, and does the ticket go through QA review?</blockquote>`,
@@ -185,12 +185,12 @@ export const WEEK_1_DAYS: Day[] = [
 <h4>4. Restoring: the pitfalls</h4>
 <p>The restore playbook is for rare cases: the site was disabled by mistake, or the customer asked for reinstatement after review. In the debug panel the green <b>Re-enable Site</b> button lifts the disable, but it <b>allow-lists the site from future scans</b>. Use it sparingly and only when you are certain the site is legitimate.</p>
 <p><b>Playbook inconsistency, confirm in #cse-soc:</b> the page on identifying Maintenance Mode says never to re-enable an <i>unpaid sandbox</i> that was disabled manually (file present) and to ask for review in #security-operations. The restore page does not mention this rule or who approves a restore. Follow the stricter rule and ask first.</p>
-<p><b>Field practice, not official policy.</b> The older manual process that placed a dashboard banner on confirmed bad accounts is no longer used in practice; the Mass Maintenance Tool replaced it, so older text may be stale. For sites a security lead disabled by hand, do not re-enable them. Bad actors often write in asking for a restore.</p>`,
+<p><b>Field practice, not official policy.</b> The older manual process that placed a dashboard banner on confirmed bad accounts is no longer used in practice; the Mass Maintenance Tool replaced it, so older text may be stale. In channel, sites a security lead disabled by hand were not re-enabled by SOC, and bad actors often write in asking for a restore. When unsure, ask #security-operations before changing the site.</p>`,
     lab: [
       `Simulated report:<blockquote>From: a brand-protection feed to abuse@pantheon.io<br>Subject: Phishing page<br>Body: The page at hxxps://acct-secure.example.test/login imitates a payment provider login and collects credentials.</blockquote>Write the exact lookup you would run to see whether it is on Pantheon. Remember to fix the link.`,
       `The lookup shows a sandbox site created yesterday, running only from Dev. The workflow log shows only setup tasks and the site shows a single login form. List every indicator that supports phishing, and say which tool you would use to disable it.`,
       `Now the same report, but the owning org is on a paid plan with a Platinum support tier and the site looks like a normal business site. What changes?`,
-      `Open the admin dashboard debug page of any sandbox site (read-only) and find where the workflow log is shown and where the green Re-enable Site button would appear when a site is disabled. Do not click anything that changes state.`,
+      `Open the admin dashboard debug page of a sandbox site you own, or the training site brix-nextjs (read-only), and find where the workflow log is shown and where the green Re-enable Site button would appear when a site is disabled. Do not click anything that changes state.`,
       `Restore scenario:<blockquote>A user writes from shop-promo.example.test: "My site was disabled and I am a real shop owner, please turn it back on." It is an unpaid sandbox and the hidden abuse file is present.</blockquote>What do you do, and what is the risk of clicking Re-enable?`
     ],
     knowhow: `<p><b>Lookup:</b> <code>@sibyl site me https://acct-secure.example.test/login</code> (with hxxps converted to https and any brackets removed).</p>
@@ -225,7 +225,7 @@ export const WEEK_1_DAYS: Day[] = [
       },
       {
         q: "An unpaid sandbox was manually disabled and the owner asks for a restore. Which is correct?",
-        o: ["Re-enable it immediately", "Do not re-enable; ask for a review in #security-operations", "Ask the owner for a bribe", "Upgrade the plan"],
+        o: ["Re-enable it immediately", "Do not re-enable; ask for a review in #security-operations", "Ask the owner to prove they are not a bad actor before doing anything", "Upgrade the plan"],
         a: 1,
         w: "The identifying-Maintenance-Mode page says not to re-enable manually disabled unpaid sandboxes. The restore page conflicts with this, so confirm in #cse-soc."
       }
@@ -278,7 +278,7 @@ export const WEEK_1_DAYS: Day[] = [
       `Simulated reclaim:<blockquote>The same university now wants labs.uni-example.example.test on its real site. It gets an error that the domain belongs to another organization.</blockquote>What do you check, and what do you do to get the domain onto the right site?`,
       `Simulated exemption:<blockquote>An agency runs a WordPress Multisite on subdomain configuration and has 40 new client domains to attach. Their sites sit in different orgs. They ask for an exemption.</blockquote>Which method, which tag, which command, and what must you do afterwards?`,
       `Simulated edge case:<blockquote>A customer asks for an exemption for one domain on one site, but the domain is on none of the standard criteria and the justification is "we prefer it that way".</blockquote>What do you do, and how fast should it be handled?`,
-      `Read-only: in Looker, open the "sites" explore and see which filter fields you would use to find sibling subdomains. Do not export data.`
+      `Read-only: in Looker, open the "sites" explore and see which filter fields you would use to find sibling subdomains. Look at the structure only; do not copy customer details into notes, and do not export data.`
     ],
     knowhow: `<p><b>Report answer.</b> Verify (signs match), remove the hijacked domains and set Sandbox via the mass tool, preventive streamlined AGCDN step, optional Dev disable. Create the internal Subdomain Takeover ticket (<code>subdomain_takeover</code>, <code>snc_internal</code>, <code>no_ratings</code>, <code>pantheon_employee</code>, OPEN) and tag <code>abuse_blocked_email</code> for the blocked account. Tell the reporter the domain was removed, without details about the hijacker. No refund and no notice to the hijacker. Consider finding sibling subdomains in Looker and a proactive notice if the AM is known.</p>
 <p><b>Reclaim answer.</b> Run <code>@sibyl site me</code> on the domain, find the containment site, verify the requester (org, roles, email), delete the domain from the containment site and add it to the customer's real site yourself. Tag <code>subdomain_returned</code>.</p>
@@ -360,7 +360,7 @@ export const WEEK_1_DAYS: Day[] = [
 <li><b>Handoff etiquette:</b> put the <b>dashboard URL</b> in the ticket notes, not just the ticket link, so SOC can act quickly.</li>
 </ul>`,
     lab: [
-      `Read-only: open the admin dashboard debug page for any sandbox site. Find the workflow log and note which entries would show a platform-abuse disable. Do not enable or lift anything.`,
+      `Read-only: open the admin dashboard debug page for a sandbox site you own, or the training site brix-nextjs. Find the workflow log and note which entries would show a platform-abuse disable. Do not enable or lift anything.`,
       `Simulated unpaid case:<blockquote>Customer writes: "My free sandbox portfolio-blog.example.test has a blue banner and I cannot push code. I did nothing wrong." The workflow log shows an automatic abuse disable and no manual file.</blockquote>What do you do first, what do you tell them, and what do you post to #cse-soc?`,
       `Simulated paid case:<blockquote>A security engineer's form creates a ticket: paid site store-front.example.test has a cryptominer file in the Dev environment. The owner has a standard (not Platinum) plan.</blockquote>Walk the full flow with dates. Today is a Monday. When is the legal due date, what happens on a no-reply, and when do you enable MM?`,
       `Simulated wave:<blockquote>Five unrelated customers write in within an hour. Each site was flagged, and a check shows the only hits are platform cache files.</blockquote>Who decides to lift MM, and what do you do in the meantime?`,

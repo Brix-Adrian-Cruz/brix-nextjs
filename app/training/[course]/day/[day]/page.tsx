@@ -23,7 +23,7 @@ type Props = { params: Promise<{ course: string; day: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { course, day } = await params;
   const content = await getCourseContent(course);
-  const d = /^\d+$/.test(day) ? content?.days.find((x) => x.id === Number(day)) : undefined;
+  const d = /^[1-9]\d*$/.test(day) ? content?.days.find((x) => x.id === Number(day)) : undefined;
   return { title: d ? `Day ${d.id}: ${d.title}` : "Not found" };
 }
 
@@ -33,7 +33,7 @@ export default async function DayPage({ params }: Props) {
   const content = await getCourseContent(courseId);
   if (!course || !content) notFound();
   const DAYS = content.days;
-  const d = /^\d+$/.test(day) ? DAYS.find((x) => x.id === Number(day)) : undefined;
+  const d = /^[1-9]\d*$/.test(day) ? DAYS.find((x) => x.id === Number(day)) : undefined;
   if (!d) notFound();
   const w = course.weeks[d.week - 1];
   const [learnHtml, knowhowHtml] = await Promise.all([

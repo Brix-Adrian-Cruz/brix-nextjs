@@ -198,7 +198,7 @@ export const REPORTS: Report[] = [
     checks: [
       `Legal validates the authority; Abuse verifies the site is actively hosted`,
       `Notify InfoSec and Legal; do not tell the site owner, do not enable Maintenance Mode, do not revoke access`,
-      `Acknowledge to the requester; InfoSec owns all later communication (page is still draft, confirm in #cse-soc)`,
+      `Acknowledge to the requester; InfoSec owns all later communication (SOP was still in draft as of June 2026 per team chat; confirm in #cse-soc)`,
     ],
     pb: { t: 'Playbook: Site Information Preservation Requests', u: cs('4971724804') },
     tk: [],

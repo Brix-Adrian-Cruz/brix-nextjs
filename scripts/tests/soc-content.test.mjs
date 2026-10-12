@@ -81,3 +81,21 @@ test("reports cover the main playbook families and have no ticket links", () => 
   assert.ok(FIELD_GUIDE_HTML.length > 2000);
   assert.match(FIELD_GUIDE_HTML, /snc_proactive/);
 });
+
+test("every field-practice label uses the exact bold wording", () => {
+  for (const d of DAYS) {
+    const t = dayText(d);
+    const total = (t.match(/Field practice, not official policy/g) || []).length;
+    const bold = (t.match(/<b>Field practice, not official policy\.<\/b>/g) || []).length;
+    assert.ok(total >= bold, `Day ${d.id} label count`);
+  }
+});
+
+// Todo until the quiz option reshuffle step has run.
+test("no day with 4+ quiz questions has the same correct index on all of them", () => {
+  for (const d of DAYS) {
+    if (d.quiz.length < 4) continue;
+    const same = d.quiz.every((q) => q.a === d.quiz[0].a);
+    assert.ok(!same, `Day ${d.id}: all answers at index ${d.quiz[0].a}`);
+  }
+});

@@ -75,7 +75,7 @@ export const FIELD_GUIDE_HTML = `
 <section class="fg" data-section="fg-escalation"><h3>Escalation paths</h3>
 <table><thead><tr><th>Topic</th><th>Who and where</th></tr></thead><tbody>
 <tr><td>Scan findings or scan permission</td><td>Short summary with ticket or chat link in #security-operations, no @here, then paste the Slack link in an internal note. Formal approval: Helpdesk ticket assigned to InfoSec.</td></tr>
-<tr><td>CSAM or NCMEC notification (field practice, not official policy)</td><td>Top priority. Raise with the SOC lead and security at once. Do not re-enable these sites and do not apply no-malware-found logic. Reports go through missingkids.org processes owned by Security.</td></tr>
+<tr><td>CSAM or NCMEC notification (field practice, not official policy)</td><td>Top priority. Raise with the SOC lead and security at once. Do not re-enable these sites and do not apply no-malware-found logic. Escalate CSAM/NCMEC reports per the SOC lead and Security.</td></tr>
 <tr><td>Legal, DMCA, preservation</td><td>Legal validates authorities and is CC'd on every communication. For preservation, notify InfoSec and Legal and tell nobody else.</td></tr>
 <tr><td>Hand-disabled site, restore requests</td><td>Ask SecOps in #security-operations. Field practice, not official policy: whether to lift Maintenance Mode is the SOC or security engineer's call, not front-line support's.</td></tr>
 <tr><td>Bug reporters</td><td>Canned reply, then InfoSec through infosec@pantheon.io.</td></tr>
@@ -95,7 +95,7 @@ export const FIELD_GUIDE_HTML = `
 <li>The Follow-Up and Check-In sections on the DMCA and Trademark pages are empty. Trademark has no Maintenance Mode instruction, and Template 5 is DMCA-specific.</li>
 <li>Template N names in Confluence do not match Zendesk macro names. Agents report macros they cannot find.</li>
 <li>The paid-site page has a blank owner for Diamond and Platinum communication.</li>
-<li>Site Information Preservation Requests is still draft with no SLA, tag or macro.</li>
+<li>Site Information Preservation Requests was still in draft as of June 2026 per team chat (confirm in #cse-soc), with no SLA, tag or macro.</li>
 <li>The Russian-entity page lists a macro literally named TBD and a data-location step with no detail.</li>
 <li>Several pages were last edited in 2022 or 2023 (maintenance-mode identification, paid-site, restore, DMCA templates, internal tags). The manual banner process in Disabling a Confirmed Malicious Site is reported as replaced by the Mass Maintenance Tool (field practice, not official policy).</li>
 <li>No playbook yet for payment disputes and card-fraud accounts (field practice, not official policy).</li>

@@ -35,10 +35,9 @@ export const WEEK_2_DAYS: Day[] = [
 <h4>Hard stops</h4>
 <ul>
 <li><b>Never paste questionable images into Slack.</b> They can be upsetting for colleagues. Describe them in words in an internal note and keep screenshots on the ticket.</li>
-<li><b>CSAM and NCMEC reports are top priority.</b> Handle them at policy level only: follow the lead's instructions, escalate immediately, and do not discuss the material beyond what the process needs.</li>
-<li>A site that a security lead shut down by hand is <b>never re-enabled by the SOC</b>. For an unpaid sandbox that was disabled manually, route the request to #security-operations for review. The "no malware found" logic does not apply, because the problem is content, not code.</li>
+<li>For an unpaid sandbox that was disabled manually, route the restore request to #security-operations for review (this matches the Maintenance Mode identification page). The "no malware found" logic does not apply, because the problem is content, not code.</li>
 </ul>
-<p><b>Field practice, not official policy.</b> In recent months the SOC lead has asked that any NCMEC notification be actioned on the first report. People who run these campaigns often write in to support asking for their site to come back, so a ticket that reads "no malware found, why was it disabled?" on a hand-disabled site should go to the security lead before you answer.</p>`,
+<p><b>Field practice, not official policy.</b> Treat CSAM and NCMEC reports as top priority: handle them at policy level only, escalate to the SOC lead immediately, and do not discuss the material beyond what the process needs. In channel, sites that a security lead shut down by hand were not re-enabled by SOC. In recent months the SOC lead has asked that any NCMEC notification be actioned on the first report. When unsure, ask in #cse-soc or #security-operations first. People who run these campaigns often write in to support asking for their site to come back, so a ticket that reads "no malware found, why was it disabled?" on a hand-disabled site should go to the security lead before you answer.</p>`,
     lab: [
       `Open the Content Review Requests playbook (link in References). Write down, in your own words, the five steps and the due date rule. Note which Slack channel and which group you tag.`,
       `Open the Handling Forwarded Security and Compliance Reports playbook. Find the line that says who must be copied on every communication, and the line that says when the internal ticket may be closed.`,
@@ -221,15 +220,15 @@ export const WEEK_2_DAYS: Day[] = [
         w: "The two sources disagree (14th day versus 14 business days). Do not state a date to anyone until it has been confirmed in #cse-soc.",
       },
       {
-        q: "A valid DMCA notice arrives for a paid site. According to the process page, what happens to the site?",
+        q: "A valid DMCA notice arrives for a paid Live site. The process page and the site-owner template word the Maintenance Mode timing differently. What is the best handling?",
         o: [
           "Nothing until the owner replies",
-          "It goes into Maintenance Mode, paid or unpaid",
-          "Only unpaid sites are put into Maintenance Mode",
+          "Put the site in Maintenance Mode per the process page, knowing the template wording differs, and confirm timing for paid Live sites with the SOC lead",
+          "Only unpaid sites are ever put into Maintenance Mode",
           "It is deleted",
         ],
         a: 1,
-        w: "The process page says to put the reported site in Maintenance Mode immediately, whether paid or unpaid. The site-owner template ties it to the deadline, which is another reason to confirm in #cse-soc.",
+        w: "The process page says to put the reported site in Maintenance Mode immediately, whether paid or unpaid, while the site-owner template ties it to the owner's deadline. Follow the process page, and confirm timing for paid Live sites with the SOC lead in #cse-soc.",
       },
     ],
     refs: [
@@ -315,7 +314,7 @@ export const WEEK_2_DAYS: Day[] = [
         w: "The checklist is: the specific URL of the content, contact information, and proof of ownership or authority to enforce.",
       },
       {
-        q: "What does the trademark process have that DMCA has not, and what does it lack?",
+        q: "How does the trademark process differ from DMCA?",
         o: [
           "It has a counter-notice phase and lacks verification",
           "It has nothing extra and lacks the 48-hour rule",
@@ -504,7 +503,7 @@ export const WEEK_2_DAYS: Day[] = [
 <p><b>Scenario B.</b> Contract customer, so first send the Trust Center link and the Request Access step. If that does not work, find their CSM through the Salesforce widget or ask in #csm, and send the request to the CSM. On HIPAA: Pantheon is not HIPAA compliant, no plugin changes that, and do not make any promise or date.</p>
 <p><b>Scenario C.</b> Ask for the exact rejection message or the report from the blacklist service. Pantheon is rarely the cause of a single-site listing. Check the domain's SPF records. If the problem is the default platform mail servers, recommend a third-party email service. If the listing involves Spamhaus DBL, check that subdomains use A or AAAA records rather than CNAMEs.</p>
 <p><b>Scenario D.</b> Send the canned bug reporter reply: sign up for BugCrowd and email the account ID to infosec@pantheon.io so InfoSec can invite them. Support does not triage the finding, does not relay it, and does not confirm any bounty. Researchers testing the platform are allowed to test.</p>
-<p><b>Scenario E.</b> Not SOC work. This is a question for #security-operations. The customer reply is that details cannot be disclosed before the official advisory, and that updates come through Pantheon's release notes. Do not speculate about affected sites.</p>
+<p><b>Scenario E.</b> Not SOC work. This is a question for #security-operations. The customer reply is that details cannot be disclosed before the official advisory. <b>Field practice, not official policy.</b> SecOps confirms what can be said, so do not disclose details before the official advisory, and confirm the wording in #security-operations. Do not speculate about affected sites.</p>
 <p><b>Field practice, not official policy.</b> If you are unsure whether something is SOC work, ask in #cse-soc before you promise anything. A one-line question there is cheaper than a wrong reply.</p>`,
     quiz: [
       {
