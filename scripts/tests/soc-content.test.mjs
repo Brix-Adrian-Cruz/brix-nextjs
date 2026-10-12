@@ -53,7 +53,7 @@ test("every URL in content is on the allow-list or an invented example.test doma
 });
 
 test("no sensitive data: emails, tokens, ticket numbers, names", () => {
-  const emails = [...everything.matchAll(/[\w.+-]+@[\w-]+\.[\w.-]+/g)].map((m) => m[0].toLowerCase());
+  const emails = [...everything.matchAll(/[\w.+-]+@[\w-]+\.[\w.-]+/g)].map((m) => m[0].toLowerCase().replace(/[.-]+$/, ""));
   const okEmails = new Set(["abuse@pantheon.io", "infosec@pantheon.io", "security@pantheon.io"]);
   for (const e of emails) assert.ok(okEmails.has(e) || /@example\.test$/.test(e), `unexpected email ${e}`);
   assert.doesNotMatch(everything, /gh[opsu]_[A-Za-z0-9]{20,}/, "github token");
